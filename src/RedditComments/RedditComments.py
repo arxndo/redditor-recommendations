@@ -33,8 +33,6 @@ class RedditComments:
             year += 1
         return month, year
 
-
-
     @staticmethod
     def withinBounds(year, month, endYear, endMonth):
         return (year < endYear) | ( (year == endYear) & (month <= endMonth) )
@@ -46,12 +44,4 @@ class RedditComments:
     @staticmethod
     def removeDownloadsDirectory():
         os.system("rm -rf downloads")
-
-    @staticmethod
-    def nextMonth(month):
-        return 1 + (month + 1) % 12
-
-    @staticmethod
-    def isJanuary(month):
-        return month == 1
 

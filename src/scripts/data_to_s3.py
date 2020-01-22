@@ -6,7 +6,7 @@ comments = RedditComments( comment_url = "https://files.pushshift.io/reddit/comm
                            s3BucketName = "romeosbucket" )
 
 
-comments.downloadBatches( startMonth = 12, \
-                            startYear = 2005, \
-                            endMonth = 1, \
-                            endYear = 2006 )
+comments.downloadBatches( startMonth = 5, \
+                            startYear = 2016, \
+                            endMonth = 12, \
+                            endYear = 2019 )
