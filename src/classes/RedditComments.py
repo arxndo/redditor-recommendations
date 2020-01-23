@@ -2,22 +2,34 @@ import os
 
 class RedditComments:
 
-    def __init__(o, comment_url, s3BucketName):
+    def __init__(o, comment_url, comment_path, s3BucketName):
         o.comment_url = comment_url
         o.s3BucketName = s3BucketName
+        o.comment_path = comment_path
 
-    def downloadBatches(o, calendar): 
+    def downloadAll(o, calendar): 
         for month, year in calendar.dates():
-            os.system("mk downloads")
-            o.downloadBatch(month, year)
-            #o.moveBatchToS3()
-            #os.system("rm -rf downloads")
+            o.download(month, year)
+            o.unzip(month, year)
+            o.moveToCurrentDirectory(month, year)
+            o.moveToS3(month, year)
 
-    def downloadBatch(o, month, year):
-        os.system( "wget -r --no-parent -A 'RC_%d-%.2d*' %s -P downloads" \
+    def download(o, month, year):
+        os.system( "wget -r --no-parent -A 'RC_%d-%.2d*' %s" \
             %  (year, month, o.comment_url) ) 
 
-    def moveBatchToS3(o):
-        os.system("aws s3 mv downloads s3://%s --recursive" \
-            % o.s3BucketName )
+    def unzip(o, month, year):
+        os.system('bzip2 -d %s/RC_%d-%.2d.bz2' \
+                % (o.comment_path, year, month) )
 
+    def moveToCurrentDirectory(o, month, year):
+        os.system('mv %s/RC_%d-%.2d .' \
+                % (o.comment_path, year, month) )
+
+    def moveToS3(month, year):
+        os.system("aws s3 mv RC_%d-%.2d s3://%s" \
+            % (year, month, o.s3BucketName ) )
+
+    def show(o, month, year):
+        os.system("head -10 RC_%d-%.2d" \
+            % (year, month) )
