@@ -12,7 +12,7 @@ class RedditComments:
         while RedditComments.withinBounds(year, month, endYear, endMonth):
             RedditComments.makeDownloadsDirectory()
             o.downloadBatch(month, year)
-            o.moveBatchToS3()
+            #o.moveBatchToS3()
             RedditComments.removeDownloadsDirectory()
             month, year = RedditComments.advanceTime(month, year)
 

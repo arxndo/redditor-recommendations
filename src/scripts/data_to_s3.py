@@ -1,5 +1,6 @@
 import sys
-sys.path.insert(0, 'src/RedditComments')
+sys.path.insert(0, 'src/classes')
+#import RedditComments
 from RedditComments import RedditComments
 
 comments = RedditComments( comment_url = "https://files.pushshift.io/reddit/comments", \
@@ -7,6 +8,6 @@ comments = RedditComments( comment_url = "https://files.pushshift.io/reddit/comm
 
 
 comments.downloadBatches( startMonth = 5, \
-                            startYear = 2016, \
-                            endMonth = 12, \
-                            endYear = 2019 )
+                            startYear = 2005, \
+                            endMonth = 2, \
+                            endYear = 2006 )
