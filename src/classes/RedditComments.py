@@ -26,9 +26,16 @@ class RedditComments:
         os.system('mv %s/RC_%d-%.2d .' \
                 % (o.comment_path, year, month) )
 
-    def moveToS3(month, year):
+    def moveToS3(o, month, year):
         os.system("aws s3 mv RC_%d-%.2d s3://%s" \
             % (year, month, o.s3BucketName ) )
+
+    def clean(o, spark, month, year):
+        df = spark.read.json("RC_%d-%.2d" \
+                % (year, month) )
+        #df = spark.read.json("s3://%s/RC_%d-%.2d" \
+        #        % (o.s3BucketName, year, month) )
+        df.show()
 
     def show(o, month, year):
         os.system("head -10 RC_%d-%.2d" \
