@@ -17,8 +17,8 @@ calendar = Calendar( startMonth = 12, \
 spark = MySpark().spark()
 
 print("%d authors posted %d comments between %d/%d and %d/%d" \
-        % ( comments.countAllAuthors(spark, calendar), \
-            comments.countAll(spark, calendar), \
+        % ( comments.countAuthors(spark, calendar), \
+            comments.count(spark, calendar), \
             calendar.startMonth, \
             calendar.startYear, \
             calendar.endMonth, \

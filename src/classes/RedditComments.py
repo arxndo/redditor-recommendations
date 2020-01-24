@@ -30,26 +30,31 @@ class RedditComments:
         os.system("aws s3 mv RC_%d-%.2d s3://%s" \
             % (year, month, self.s3BucketName ) )
 
-    def countAllAuthors(self, spark, calendar):
-        authorCount = 0;
-        for month, year in calendar.dates():
-            authorCount += self.countAuthors(spark, month, year) 
-        return authorCount
-
-    def countAll(self, spark, calendar):
-        count = 0;
-        for month, year in calendar.dates():
-            count += self.count(spark, month, year)
-        return count
-
     def count(self, spark, month, year):
         df = self.dataFrame(spark, month, year)
         return df.count()
 
-    def countAuthors(self, spark, month, year):
-        df = self.dataFrame(spark, month, year)
+    def countAuthors(self, spark, calendar):
+        df = self.dataFrame(spark, calendar)
         return df.select("author").distinct().count()        
 
-    def dataFrame(self, spark, month, year):
-        return spark.read.json("s3a://%s/RC_%d-%.2d" \
-                % (self.s3BucketName, year, month) )
+
+    def dataFrame(self, spark, calendar):
+        counter = 1
+        for month, year in calendar.dates():
+            newDF = spark.read.json("s3a://%s/RC_%d-%.2d" \
+                    % (self.s3BucketName, year, month) ) 
+
+            newDF = newDF.select("author")
+
+            if counter == 1:
+                df = newDF
+            else:
+                df = df.union(newDF)
+            counter += 1
+        return df
+
+
+
+
+
