@@ -36,16 +36,16 @@ class Comments:
 
     def countAuthors(self, spark, calendar):
         df = self.dataFrame(spark, calendar)
-        return df.select("id").distinct().count()        
+        return df.select("author").distinct().count()        
 
-    def dataFrame(self, spark, calendar):
+    def dataFrame(self, context, calendar):
         counter = 1
         for month, year in calendar.dates():
-            newDF = spark.read.json("s3a://%s/RC_%d-%.2d" \
-                    % (self.s3BucketName, year, month) ) 
-            newDF.printSchema()
+            newDF = context.read.json("s3a://%s/RC_%d-%.2d" \
+                    % (self.s3BucketName, year, month) )
 
-            newDF = newDF.select("id", "parent_id", "score", "subreddit_id" )
+            newDF = newDF.select("author", "score", "link_id")
+	
 
             if counter == 1:
                 df = newDF

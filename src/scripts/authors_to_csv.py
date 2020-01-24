@@ -2,7 +2,7 @@ import sys
 sys.path.insert(0, 'src/classes')
 from Comments import Comments
 from Calendar import Calendar
-from MySpark import MySpark
+from MyContext import MyContext
 from Authors import Authors
 
 comments = Comments( comment_url = "https://files.pushshift.io/reddit/comments", \
@@ -15,10 +15,13 @@ calendar = Calendar( startMonth = 12, \
                             endMonth = 2, \
                             endYear = 2006 )
 
-spark = MySpark().spark()
+context = MyContext().context()
 
-authors = Authors()
+AuthorScores().loadComments(context, comments, calendar) \
+              .addScores() \
+              .write()
 
-authors.writeToCSV(spark, comments, calendar)
+
+
 
 
