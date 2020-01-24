@@ -3,7 +3,7 @@ sys.path.insert(0, 'src/classes')
 from Comments import Comments
 from Calendar import Calendar
 from MyContext import MyContext
-from Authors import Authors
+from AuthorScores import AuthorScores
 
 comments = Comments( comment_url = "https://files.pushshift.io/reddit/comments", \
                            comment_path = 'files.pushshift.io/reddit/comments', \
