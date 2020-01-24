@@ -1,6 +1,6 @@
 import os
 
-class RedditComments:
+class Comments:
 
     def __init__(self, comment_url, comment_path, s3BucketName):
         self.comment_url = comment_url
@@ -30,22 +30,22 @@ class RedditComments:
         os.system("aws s3 mv RC_%d-%.2d s3://%s" \
             % (year, month, self.s3BucketName ) )
 
-    def count(self, spark, month, year):
-        df = self.dataFrame(spark, month, year)
+    def count(self, spark, calendar):
+        df = self.dataFrame(spark, calendar)
         return df.count()
 
     def countAuthors(self, spark, calendar):
         df = self.dataFrame(spark, calendar)
-        return df.select("author").distinct().count()        
-
+        return df.select("id").distinct().count()        
 
     def dataFrame(self, spark, calendar):
         counter = 1
         for month, year in calendar.dates():
             newDF = spark.read.json("s3a://%s/RC_%d-%.2d" \
                     % (self.s3BucketName, year, month) ) 
+            newDF.printSchema()
 
-            newDF = newDF.select("author")
+            newDF = newDF.select("id", "parent_id", "score", "subreddit_id" )
 
             if counter == 1:
                 df = newDF
