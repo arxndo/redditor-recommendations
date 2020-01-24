@@ -1,10 +1,10 @@
-import os
 from pyspark.sql import functions as F
+from ScalableData import ScalableData
 
-class AuthorLinks:
+class AuthorLinks(ScalableData):
  
-    def loadComments(self, context, comments, calendar):
-        self.df = comments.dataFrame(context, calendar) 
+    def ingest(self, date):
+        self.df = comments.dataFrame(o.context, calendar) 
         return self
 
     def collectLinks(self):

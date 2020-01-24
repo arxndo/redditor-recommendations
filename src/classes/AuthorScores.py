@@ -1,13 +1,12 @@
-import os
-from pyspark.sql import functions as F
+from ScalableData import ScalableData
 
-class AuthorScores:
+class AuthorScores(ScalableData):
  
-    def loadComments(self, context, comments, calendar):
-        self.df = comments.dataFrame(context, calendar) 
+    def ingest(self, date):
+        self.df = comments.dataFrame(o.context, date) 
         return self
 
-    def addScores(self):
+    def transform(self):
         self.df = self.df.groupBy("author") \
                          .agg( {"score" : "sum"} ) \
         return self

@@ -10,51 +10,27 @@ class Comments:
     def downloadAll(self, calendar): 
         for month, year in calendar.dates():
             self.download(month, year)
-            self.unzip(month, year)
-            self.moveToCurrentDirectory(month, year)
-            self.moveToS3(month, year)
+            self.unzip(date)
+            self.toCurrentDirectory(date)
+            self.toS3(date)
 
-    def download(self, month, year):
+    def download(self, date):
         os.system( "wget -r --no-parent -A 'RC_%d-%.2d*' %s" \
             %  (year, month, self.comment_url) ) 
 
-    def unzip(self, month, year):
+    def unzip(self, date):
         os.system('bzip2 -d %s/RC_%d-%.2d.bz2' \
                 % (self.comment_path, year, month) )
 
-    def moveToCurrentDirectory(self, month, year):
+    def toCurrentDirectory(self, date):
         os.system('mv %s/RC_%d-%.2d .' \
                 % (self.comment_path, year, month) )
 
-    def moveToS3(self, month, year):
+    def toS3(self, date):
         os.system("aws s3 mv RC_%d-%.2d s3://%s" \
             % (year, month, self.s3BucketName ) )
 
-    def count(self, spark, calendar):
-        df = self.dataFrame(spark, calendar)
-        return df.count()
-
-    def countAuthors(self, spark, calendar):
-        df = self.dataFrame(spark, calendar)
-        return df.select("author").distinct().count()        
-
-    def dataFrame(self, context, calendar):
-        counter = 1
-        for month, year in calendar.dates():
-            newDF = context.read.json("s3a://%s/RC_%d-%.2d" \
-                    % (self.s3BucketName, year, month) )
-
-            newDF = newDF.select("author", "score", "link_id")
-	
-
-            if counter == 1:
-                df = newDF
-            else:
-                df = df.union(newDF)
-            counter += 1
-        return df
-
-
-
-
+    def dataFrame(self, context, date):
+        return context.read.json("s3a://%s/RC_%d-%.2d" \
+                    % (self.s3BucketName, date) )
 
