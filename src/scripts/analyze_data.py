@@ -1,6 +1,6 @@
 import sys
 sys.path.insert(0, 'src/classes')
-from RedditComments import RedditComments
+from Comments import Comments
 from Calendar import Calendar
 from MySpark import MySpark
 

@@ -1,11 +1,11 @@
 import sys
 sys.path.insert(0, 'src/classes')
-from RedditComments import RedditComments
+from Comments import Comments
 from Calendar import Calendar
 from MySpark import MySpark
 from Authors import Authors
 
-comments = RedditComments( comment_url = "https://files.pushshift.io/reddit/comments", \
+comments = Comments( comment_url = "https://files.pushshift.io/reddit/comments", \
                            comment_path = 'files.pushshift.io/reddit/comments', \
                            s3BucketName = "romeosredditcomments" )
 
