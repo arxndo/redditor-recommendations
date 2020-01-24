@@ -2,7 +2,7 @@ import sys
 sys.path.insert(0, 'src/classes')
 from RedditComments import RedditComments
 from Calendar import Calendar
-from SparkSuite import SparkSuite
+from MySpark import MySpark
 
 comments = RedditComments( comment_url = "https://files.pushshift.io/reddit/comments", \
                            comment_path = 'files.pushshift.io/reddit/comments', \
@@ -14,12 +14,15 @@ calendar = Calendar( startMonth = 12, \
                             endMonth = 2, \
                             endYear = 2006 )
 
+spark = MySpark().spark()
 
-sparkSuite = SparkSuite("myApp")
-spark = sparkSuite.spark()
+print("%d authors posted %d comments between %d/%d and %d/%d" \
+        % ( comments.countAllAuthors(spark, calendar), \
+            comments.countAll(spark, calendar), \
+            calendar.startMonth, \
+            calendar.startYear, \
+            calendar.endMonth, \
+            calendar.endYear ) )
 
-month = 12;
-year = 2005;
-comments.clean(spark, month, year)
 
 

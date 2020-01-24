@@ -2,21 +2,21 @@ import os
 
 class Calendar:
 
-    def __init__(o, startMonth, startYear, endMonth, endYear):
-        o.startMonth = startMonth
-        o.startYear = startYear
-        o.endMonth = endMonth
-        o.endYear = endYear
+    def __init__(self, startMonth, startYear, endMonth, endYear):
+        self.startMonth = startMonth
+        self.startYear = startYear
+        self.endMonth = endMonth
+        self.endYear = endYear
 
-    def dates(o):
-        month = o.startMonth
-        year = o.startYear 
-        while o.withinBounds(month, year):
+    def dates(self):
+        month = self.startMonth
+        year = self.startYear 
+        while self.withinBounds(month, year):
             yield month, year
             month, year = Calendar.advanceMonth(month, year) 
         
-    def show(o):
-        for month, year in o.dates():
+    def show(self):
+        for month, year in self.dates():
             print('month = %d, year = %d' % (month, year) )
 
     @staticmethod
@@ -27,6 +27,6 @@ class Calendar:
            year += 1
         return month, year
 
-    def withinBounds(o, month, year):
-        return (year < o.endYear) | ( (year == o.endYear) & (month <= o.endMonth) )
+    def withinBounds(self, month, year):
+        return (year < self.endYear) | ( (year == self.endYear) & (month <= self.endMonth) )
 
