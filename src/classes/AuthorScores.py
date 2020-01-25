@@ -3,17 +3,17 @@ from ScalableData import ScalableData
 class AuthorScores(ScalableData):
  
     def ingest(self, date):
-        self.df = comments.dataFrame(o.context, date) 
+        self.df = self.comments.dataFrame(self.context, date) 
         return self
 
     def transform(self):
         self.df = self.df.groupBy("author") \
-                         .agg( {"score" : "sum"} ) \
+                         .agg( {"score" : "sum"} )
         return self
 
-    def write(self):
+    def write(self, date):
         self.df.show(10)
-        self.df.write. \
+        self.df.write \
             .option("header", "false") \
-            .csv('authorScores')
+            .csv('data/authorScores/%s' % date)
 

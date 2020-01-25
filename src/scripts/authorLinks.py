@@ -9,14 +9,7 @@ comments = Comments( comment_url = "https://files.pushshift.io/reddit/comments",
                            comment_path = 'files.pushshift.io/reddit/comments', \
                            s3BucketName = "romeosredditcomments" )
 
-
-calendar = Calendar( startMonth = 12, \
-                            startYear = 2005, \
-                            endMonth = 2, \
-                            endYear = 2006 )
-
 context = MyContext().context()
 
-AuthorLinks().loadComments(context, comments, calendar) \
-              .collectLinks() \
-              .write()
+AuthorLinks(context, comments) \
+    .process('2005-12', '2006-02')

@@ -4,7 +4,7 @@ from ScalableData import ScalableData
 class AuthorLinks(ScalableData):
  
     def ingest(self, date):
-        self.df = comments.dataFrame(o.context, calendar) 
+        self.df = self.comments.dataFrame(self.context, calendar) 
         return self
 
     def collectLinks(self):
@@ -12,7 +12,7 @@ class AuthorLinks(ScalableData):
                       .agg(F.collect_set("link_id" ))
         return self
 
-    def write(self):
+    def write(self, date):
         self.df.show(10)
         #self.df.write.option("header", "true").csv('authorScores')
 
