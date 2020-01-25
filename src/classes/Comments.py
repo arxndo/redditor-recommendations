@@ -15,22 +15,22 @@ class Comments:
             self.toS3(date)
 
     def download(self, date):
-        os.system( "wget -r --no-parent -A 'RC_%d-%.2d*' %s" \
-            %  (year, month, self.comment_url) ) 
+        os.system( "wget -r --no-parent -A 'RC_%s*' %s" \
+            %  (date, self.comment_url) ) 
 
     def unzip(self, date):
-        os.system('bzip2 -d %s/RC_%d-%.2d.bz2' \
-                % (self.comment_path, year, month) )
+        os.system('bzip2 -d %s/RC_%s.bz2' \
+                % (self.comment_path, date) )
 
     def toCurrentDirectory(self, date):
-        os.system('mv %s/RC_%d-%.2d .' \
-                % (self.comment_path, year, month) )
+        os.system('mv %s/RC_%s .' \
+                % (self.comment_path, date) )
 
     def toS3(self, date):
-        os.system("aws s3 mv RC_%d-%.2d s3://%s" \
-            % (year, month, self.s3BucketName ) )
+        os.system("aws s3 mv RC_%s s3://%s" \
+            % (date, self.s3BucketName ) )
 
     def dataFrame(self, context, date):
-        return context.read.json("s3a://%s/RC_%d-%.2d" \
+        return context.read.json("s3a://%s/RC_%s" \
                     % (self.s3BucketName, date) )
 

@@ -1,4 +1,5 @@
-import os
+from datetime import datetime
+from monthdelta import monthdelta
 
 class ScalableData:
 
@@ -7,7 +8,17 @@ class ScalableData:
         o.comments = comments
 
     def process(self, startDate, endDate):
-        for date in blah:
+        for date in ScalableData.dates():
               self.ingest(o.context, o.comments, date) \
                   .transform() \
                   .write()
+
+    @staticMethod
+    def dates(startDate, endDate):
+        date = startDate
+        yield date
+        while (date <= endDate):
+            date = (datetime.strptime(date, %Y-%m) \
+                    + monthdelta(1)) \
+                     .strftime('%Y-%m')
+            yield date
