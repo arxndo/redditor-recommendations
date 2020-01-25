@@ -11,7 +11,27 @@ class ScalableData:
         for date in ScalableData.dates(startDate, endDate):
               self.ingest(date) \
                   .transform() \
-                  .write(date)
+                  .df
+                  .write \
+                  .option("header", "false") \
+                  .csv('data/%s/%s' % (self.name, date))
+
+    def merge(self):
+        self.context \
+            .read \
+            .format('csv') \
+            .load('data/%s/*.csv' % self.name) \
+            .transform() \
+            .df \
+            .write \ 
+            .option("header", "false") \
+            .csv('data/%s.csv' % self.name)
+
+    def writeAll(self):
+        self.df.write \
+            .option("header", "false") \
+            .csv('data/%s/%s.csv' % (self.name, self.name))
+
 
     @staticmethod
     def dates(startDate, endDate):

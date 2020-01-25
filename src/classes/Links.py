@@ -1,7 +1,7 @@
 from pyspark.sql import functions as F
 from ScalableData import ScalableData
 
-class AuthorLinks(ScalableData):
+class Links(ScalableData):
  
     def ingest(self, date):
         self.df = self.comments.dataFrame(self.context, calendar) 
