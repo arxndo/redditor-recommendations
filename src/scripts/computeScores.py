@@ -16,12 +16,6 @@ startDate = '2005-12'
 endDate = '2006-02'
 scores = Scores(context, comments)
 
-print(' ')
-print('hello world')
-print(' ')
+scores.process(startDate, endDate) \
+      .merge(startDate, endDate)
 
-scores.ingest(startDate)
-scores.df.sql('SELECT tableName.* FROM tableName').show()
-
-         #.merge(startDate, endDate)
-         #.process('2005-12', '2006-02') \
