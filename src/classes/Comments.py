@@ -1,18 +1,22 @@
 import os
+from Data import Data
 
-class Comments:
+class Comments(Data):
 
     def __init__(self, comment_url, comment_path, s3BucketName):
         self.comment_url = comment_url
         self.s3BucketName = s3BucketName
         self.comment_path = comment_path
 
-    def downloadAll(self, calendar): 
-        for month, year in calendar.dates():
-            self.download(month, year)
-            self.unzip(date)
-            self.toCurrentDirectory(date)
-            self.toS3(date)
+    def ingest(self, date):
+        self.download(date)
+
+    def transform(self, date):
+        self.unzip(date)
+
+    def write(self, date):
+        self.toCurrentDirectory(date)
+        self.toS3(date)
 
     def download(self, date):
         os.system( "wget -r --no-parent -A 'RC_%s*' %s" \

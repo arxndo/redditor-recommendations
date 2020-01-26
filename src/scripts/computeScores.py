@@ -10,5 +10,13 @@ comments = Comments( comment_url = "https://files.pushshift.io/reddit/comments",
 
 context = MyContext().context()
 
-Scores(context, comments) \
-    .process('2005-12', '2006-02')
+startDate = '2005-12'
+endDate = '2006-02'
+scores = Scores(context, comments)
+
+scores.ingest('2005-12')
+scores.df.sql('SELECT tableName.* FROM tableName').show()
+
+
+         #.merge(startDate, endDate)
+         #.process('2005-12', '2006-02') \

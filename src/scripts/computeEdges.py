@@ -1,9 +1,9 @@
 import sys
 sys.path.insert(0, 'src/classes')
 from Comments import Comments
-from Calendar import Calendar
 from MyContext import MyContext
-from Links import Links
+from Scores import Scores
+from Utility import Utility as ut
 
 comments = Comments( comment_url = "https://files.pushshift.io/reddit/comments", \
                            comment_path = 'files.pushshift.io/reddit/comments', \
@@ -11,4 +11,10 @@ comments = Comments( comment_url = "https://files.pushshift.io/reddit/comments",
 
 context = MyContext().context()
 
-Links(context, comments).process('2005-12', '2006-02').merge()
+edges = Edges(context, comments)
+
+edges = ut.process( edges, '2005-12', '2006-02')
+
+edges = ut.merge( edges )
+
+ut.write( edges )
