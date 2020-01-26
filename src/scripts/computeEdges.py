@@ -1,18 +1,20 @@
 import sys
 sys.path.insert(0, 'src/classes')
 from Comments import Comments
-from Calendar import Calendar
+from MyContext import MyContext
+from Scores import Scores
+from Utility import Utility as ut
 
 comments = Comments( comment_url = "https://files.pushshift.io/reddit/comments", \
                            comment_path = 'files.pushshift.io/reddit/comments', \
                            s3BucketName = "romeosredditcomments" )
 
+context = MyContext().context()
 
-calendar = Calendar( startMonth = 5, \
-                            startYear = 2005, \
-                            endMonth = 2, \
-                            endYear = 2006 )
+edges = Edges(context, comments)
 
-comments.downloadAll( calendar )
+edges = ut.process( edges, '2005-12', '2006-02')
 
-#comments.show(12, 2005)
+edges = ut.merge( edges )
+
+ut.write( edges )
