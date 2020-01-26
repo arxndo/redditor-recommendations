@@ -1,7 +1,7 @@
 import os
-from Data import Data
+from Sequentiable import Sequentiable
 
-class Comments(Data):
+class Comments(Sequentiable):
 
     def __init__(self, comment_url, comment_path, s3BucketName):
         self.comment_url = comment_url

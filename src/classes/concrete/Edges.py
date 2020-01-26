@@ -1,10 +1,11 @@
 from pyspark.sql import functions as F
-from ScalableData import ScalableData
+from Sequentiable import Sequentiable
+from Mergeable import Mergeable
 
-class Links(ScalableData):
+class Edges(Sequentiable, Mergeable):
  
     def ingest(self, date):
-        self.df = self.comments.dataFrame(self.context, calendar) 
+        self.df = self.comments.frame(self.context, calendar) 
         return self
 
     def collectLinks(self):

@@ -1,4 +1,6 @@
 import sys
+sys.path.insert(0, 'src/classes/abstract')
+sys.path.insert(0, 'src/classes/concrete')
 sys.path.insert(0, 'src/classes')
 from Comments import Comments
 from MyContext import MyContext
@@ -14,9 +16,12 @@ startDate = '2005-12'
 endDate = '2006-02'
 scores = Scores(context, comments)
 
-scores.ingest('2005-12')
-scores.df.sql('SELECT tableName.* FROM tableName').show()
+print(' ')
+print('hello world')
+print(' ')
 
+scores.ingest(startDate)
+scores.df.sql('SELECT tableName.* FROM tableName').show()
 
          #.merge(startDate, endDate)
          #.process('2005-12', '2006-02') \

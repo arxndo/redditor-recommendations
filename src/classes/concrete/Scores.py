@@ -1,7 +1,8 @@
-from Data import Data
 from Mergeable import Mergeable
+from Sequentiable import Sequentiable
+from RawInput import RawInput
 
-class Scores(Data, Mergeable):
+class Scores(RawInput, Sequentiable, Mergeable):
  
     name = 'scores'
     column1Name = 'author'
@@ -10,10 +11,6 @@ class Scores(Data, Mergeable):
     def __init__(self, context, comments):
         self.context = context
         self.comments = comments
-
-    def ingest(self, date):
-        self.df = self.comments.dataFrame(self.context, date) 
-        return self
 
     def transform(self, date):
         self.df = self.df.groupBy(self.column1Name) \
