@@ -5,15 +5,16 @@ sys.path.insert(0, 'src/classes/concrete')
 sys.path.insert(0, 'src/classes')
 from Comments import Comments
 from Calendar import Calendar
+import yaml
 
-comments = Comments( comment_url = "https://files.pushshift.io/reddit/comments", \
-                           comment_path = 'files.pushshift.io/reddit/comments', \
-                           s3BucketName = "romeosredditcomments" )
+with open('config.yml', 'r') as ymlfile:
+    cfg = yaml.load(ymlfile, Loader=yaml.FullLoader)
 
 
-startDate = '2006-03'
-endDate = '2006-05'
+comments = Comments( cfg['reddit']['commentsUrl'], \
+                     cfg['reddit']['commentsPath'], \
+                     cfg['s3']['commentsBucket'] )
 
-comments.process(startDate, endDate)
 
-#comments.show(12, 2005)
+comments.process(cfg['dates']['startDate'], cfg['dates']['endDate'])
+

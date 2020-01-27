@@ -25,7 +25,7 @@ class Comments(Sequentiable):
             %  (date, self.comment_url) ) 
 
     def unzip(self, date):
-        os.system('bzip2 -d %s/RC_%s.bz2' \
+        os.system('bzip2 -d %s/RC_%s.*' \
                 % (self.comment_path, date) )
 
     def toCurrentDirectory(self, date):

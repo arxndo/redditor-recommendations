@@ -46,3 +46,6 @@ class Edges(GraphObject):
             .write \
             .option('header', 'true') \
             .csv('data/%s/%s_%s' % (self.name, startDate, endDate))
+
+
+

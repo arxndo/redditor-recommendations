@@ -6,17 +6,23 @@ from Comments import Comments
 from Calendar import Calendar
 from MyContext import MyContext
 from Edges import Edges
+import yaml
 
-comments = Comments( comment_url = "https://files.pushshift.io/reddit/comments", \
-                           comment_path = 'files.pushshift.io/reddit/comments', \
-                           s3BucketName = "romeosredditcomments" )
+
+with open('config.yml', 'r') as ymlfile:
+    cfg = yaml.load(ymlfile, Loader=yaml.FullLoader)
+
+
+comments = Comments( cfg['reddit']['comments_url'], \
+                     cfg['reddit']['comments_path'], \
+                     cfg['s3']['commentsBucket'] )
+
 
 context = MyContext().context()
 
-startDate = '2005-12'
-endDate = '2006-02'
 
 edges = Edges(context, comments)
-#edges.process(startDate, endDate)
-edges.merge(startDate, endDate)
+
+edges.process(cfg['startDate'], cfg['endDate'])
+#edges.merge(startDate, endDate)
 

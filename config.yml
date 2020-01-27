@@ -1,0 +1,10 @@
+s3:
+    commentsBucket: romeosredditcomments
+    edgesBucket:  redditedges
+reddit:
+    commentsUrl: https://files.pushshift.io/reddit/comments
+    commentsPath: files.pushshift.io/reddit/comments
+dates:
+    startDate: 2014-01
+    endDate: 2017-11
+

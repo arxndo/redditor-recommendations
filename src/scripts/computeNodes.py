@@ -5,10 +5,17 @@ sys.path.insert(0, 'src/classes')
 from Comments import Comments
 from MyContext import MyContext
 from Nodes import Nodes
+import yaml
 
-comments = Comments( comment_url = "https://files.pushshift.io/reddit/comments", \
-                           comment_path = 'files.pushshift.io/reddit/comments', \
-                           s3BucketName = "romeosredditcomments" )
+
+with open('config.yml', 'r') as ymlfile:
+    cfg = yaml.load(ymlfile, Loader=yaml.FullLoader)
+
+
+comments = Comments( comment_url = cfg['reddit']['comments_url'], \
+                           comment_path = cfg['reddit']['comments_path'], \
+                           s3BucketName = cfg['s3']['commentsBucket'] )
+
 
 context = MyContext().context()
 
