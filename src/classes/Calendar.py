@@ -3,14 +3,13 @@ from monthdelta import monthdelta
 
 class Calendar:
 
-    def paths(self, startDate, endDate):
+    def paths(name, startDate, endDate):
 
         paths = []
         for date in Calendar.dates(startDate, endDate):
-            paths.append('data/%s/%s/*.csv' % (self.name, date))
+            paths.append('data/%s/%s/*.csv' % (name, date))
 
         return paths
-
 
     def dates(startDate, endDate):
 

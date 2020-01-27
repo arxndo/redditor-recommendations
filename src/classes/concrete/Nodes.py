@@ -1,5 +1,6 @@
 from GraphObject import GraphObject
 from Sequentiable import Sequentiable
+from Calendar import Calendar
 
 class Nodes(GraphObject, Sequentiable):
  
@@ -17,7 +18,8 @@ class Nodes(GraphObject, Sequentiable):
         df = self.context \
             .read \
             .format('csv') \
-            .load(self.paths(startDate, endDate)) \
+            .option('header', 'true') \
+            .load(Calendar.paths(self.name, startDate, endDate)) \
             .groupBy('author') \
             .agg( {'score' : 'sum'} ) \
             .withColumnRenamed('sum(score)', 'score') \
