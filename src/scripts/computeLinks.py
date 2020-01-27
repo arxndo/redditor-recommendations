@@ -1,4 +1,6 @@
 import sys
+sys.path.insert(0, 'src/classes/abstract')
+sys.path.insert(0, 'src/classes/concrete')
 sys.path.insert(0, 'src/classes')
 from Comments import Comments
 from Calendar import Calendar
@@ -11,4 +13,9 @@ comments = Comments( comment_url = "https://files.pushshift.io/reddit/comments",
 
 context = MyContext().context()
 
-Links(context, comments).process('2005-12', '2006-02').merge()
+startDate = '2005-12'
+endDate = '2006-02'
+links = Links(context, comments)
+
+links.process(startDate, endDate)
+
