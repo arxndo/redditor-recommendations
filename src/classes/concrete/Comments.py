@@ -10,9 +10,11 @@ class Comments(Sequentiable):
 
     def ingest(self, date):
         self.download(date)
+        return self
 
     def transform(self, date):
         self.unzip(date)
+        return self
 
     def write(self, date):
         self.toCurrentDirectory(date)

@@ -1,5 +1,8 @@
 import sys
 sys.path.insert(0, 'src/classes')
+sys.path.insert(0, 'src/classes/abstract')
+sys.path.insert(0, 'src/classes/concrete')
+sys.path.insert(0, 'src/classes')
 from Comments import Comments
 from Calendar import Calendar
 
@@ -8,11 +11,9 @@ comments = Comments( comment_url = "https://files.pushshift.io/reddit/comments",
                            s3BucketName = "romeosredditcomments" )
 
 
-calendar = Calendar( startMonth = 5, \
-                            startYear = 2005, \
-                            endMonth = 2, \
-                            endYear = 2006 )
+startDate = '2006-03'
+endDate = '2006-05'
 
-comments.downloadAll( calendar )
+comments.process(startDate, endDate)
 
 #comments.show(12, 2005)
