@@ -2,17 +2,13 @@ from pyspark.sql import functions as F
 from RawInput import RawInput
 from Sequentiable import Sequentiable
 
-class Links(RawInput, Sequentiable):
+class Edges(GraphObject):
  
-    name = 'links'
-    nodeName = 'author'
-
-    def __init__(self, context, comments):
-        self.context = context
-        self.comments = comments
+    name = 'edges'
 
     def transform(self, date):
-        self.df = self.df.groupBy("author") \
+        self.df = self.df.where('author != "[deleted]"') \
+                      .groupBy("author") \
                       .agg(F.collect_set("link_id" )) \
                       .withColumnRenamed('collect_set(link_id)', 'link_ids')
 
@@ -23,11 +19,14 @@ class Links(RawInput, Sequentiable):
                      .withColumnRenamed('link_ids', 'link_ids_2')
 
         self.df = df1.crossJoin(df2) \
-                     .where(df1.author_1 > df2.author_2)
+                 .where(df1.author_1 < df2.author_2) \
+                 .select('author_1', \
+                       'author_2', \
+                       F.size(F.array_intersect('link_ids_1', 'link_ids_2'))) \
+                 .withColumnRenamed('size(array_intersect(link_ids_1, link_ids_2))', \
+                                    'weight') \
+                 .where('weight > 0')
 
         return self
 
-    def write(self, date):
-        self.df.show(10)
-        #self.df.write.option("header", "true").csv('authorScores')
 
