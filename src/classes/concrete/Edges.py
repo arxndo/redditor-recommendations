@@ -26,7 +26,8 @@ class Edges(GraphObject):
                        F.size(F.array_intersect('link_ids_1', 'link_ids_2'))) \
                  .withColumnRenamed('size(array_intersect(link_ids_1, link_ids_2))', \
                                     'weight') \
-                 .where('weight > 0')
+                 .where('weight > 0') \
+
 
         return self
 
@@ -36,10 +37,12 @@ class Edges(GraphObject):
         df = self.context \
             .read \
             .format('csv') \
-            .load(Calendar.paths(startDate, endDate)) \
-            .groupBy('author') \
+            .option('header', 'true') \
+            .load(Calendar.paths(self.name, startDate, endDate)) \
+            .groupBy('author_1', 'author_2') \
             .agg( {'weight' : 'sum'} ) \
             .withColumnRenamed('sum(weight)', 'weight') \
+            .sort(F.desc('weight')) \
             .write \
             .option('header', 'true') \
             .csv('data/%s/%s_%s' % (self.name, startDate, endDate))

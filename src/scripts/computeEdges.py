@@ -5,7 +5,7 @@ sys.path.insert(0, 'src/classes')
 from Comments import Comments
 from Calendar import Calendar
 from MyContext import MyContext
-from Links import Links
+from Edges import Edges
 
 comments = Comments( comment_url = "https://files.pushshift.io/reddit/comments", \
                            comment_path = 'files.pushshift.io/reddit/comments', \
@@ -15,7 +15,8 @@ context = MyContext().context()
 
 startDate = '2005-12'
 endDate = '2006-02'
-links = Links(context, comments)
 
-links.process(startDate, endDate)
+edges = Edges(context, comments)
+#edges.process(startDate, endDate)
+edges.merge(startDate, endDate)
 
