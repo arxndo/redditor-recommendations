@@ -3,6 +3,15 @@ from monthdelta import monthdelta
 
 class Calendar:
 
+    def s3Paths(name, startDate, endDate):
+
+        paths = []
+        for date in Calendar.dates(startDate, endDate):
+            paths.append('data/%s/%s/*.csv' % (name, date))
+
+        return paths
+
+
     def paths(name, startDate, endDate):
 
         paths = []

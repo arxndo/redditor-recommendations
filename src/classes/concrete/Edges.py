@@ -2,6 +2,7 @@ from pyspark.sql import functions as F
 from Sequentiable import Sequentiable
 from GraphObject import GraphObject
 from Calendar import Calendar
+import os
 
 class Edges(GraphObject):
  
@@ -36,16 +37,16 @@ class Edges(GraphObject):
 
         df = self.context \
             .read \
-            .format('csv') \
-            .option('header', 'true') \
+            .parquet \
             .load(Calendar.paths(self.name, startDate, endDate)) \
             .groupBy('author_1', 'author_2') \
             .agg( {'weight' : 'sum'} ) \
             .withColumnRenamed('sum(weight)', 'weight') \
             .sort(F.desc('weight')) \
             .write \
-            .option('header', 'true') \
-            .csv('data/%s/%s_%s' % (self.name, startDate, endDate))
+            .parquet('data/%s/%s_%s' % (self.name, startDate, endDate))
 
-
+        
+        os.system('aws s3 mv data/%s/%s_%s s3://%s/merged/%s_%s/ --recursive' \
+            % (self.name, startDate, endDate, self.s3BucketName, startDate, endDate))
 

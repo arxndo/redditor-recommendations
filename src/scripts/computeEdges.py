@@ -13,16 +13,15 @@ with open('config.yml', 'r') as ymlfile:
     cfg = yaml.load(ymlfile, Loader=yaml.FullLoader)
 
 
-comments = Comments( cfg['reddit']['comments_url'], \
-                     cfg['reddit']['comments_path'], \
+comments = Comments( cfg['reddit']['commentsUrl'], \
+                     cfg['reddit']['commentsPath'], \
                      cfg['s3']['commentsBucket'] )
-
 
 context = MyContext().context()
 
+edges = Edges(context, comments, cfg['s3']['edgesBucket'])
 
-edges = Edges(context, comments)
+edges.process(cfg['dates']['startDate'], cfg['dates']['endDate'])
 
-edges.process(cfg['startDate'], cfg['endDate'])
-#edges.merge(startDate, endDate)
+#edges.merge(cfg['dates']['startDate'], cfg['dates']['endDate'])
 
