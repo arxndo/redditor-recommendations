@@ -16,6 +16,7 @@ class GraphObject(Sequentiable):
     def write(self, date):
         self.df.write.parquet('s3a://%s/nonMerged/%s'
             % (self.s3BucketName, date), mode='overwrite')
+
         #os.system("aws s3 mv data/%s/%s s3://%s/nonMerged/%s/ --recursive" \
         #    % (self.name, date, self.s3BucketName, date))
         #os.system('rm -rf data')

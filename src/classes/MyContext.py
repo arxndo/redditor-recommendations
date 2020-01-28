@@ -8,11 +8,19 @@ class MyContext:
         session = SparkSession \
        	          .builder \
                   .appName("romeosSpark") \
+                  .master('spark://10.0.0.11:7077') \
                   .getOrCreate()
 
 
         sparkContext = session.sparkContext
-       #     .addFile('src/classes/*.py')
+            #.addFile('src/scripts/computeEdges') \
+            #.addFile('src/classes/concrete/Edges.py') \
+            #.addFile('src/classes/concrete/Comments.py') \
+            #.addFile('src/classes/Calendar.py') \
+            #.addFile('src/classes/MyContext')
+
 
         hiveContext = HiveContext(sparkContext)
+
+
         return hiveContext

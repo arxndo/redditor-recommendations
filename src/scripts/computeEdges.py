@@ -7,7 +7,11 @@ from Calendar import Calendar
 from MyContext import MyContext
 from Edges import Edges
 import yaml
+import os
 
+os.environ['PYSPARK_PYTHON'] = '/usrkkjh/bin/python3.5'
+
+os.environ["PYSPARKDRIVER_PYTHON"]= "/usr/bin/python3.5"
 
 with open('config.yml', 'r') as ymlfile:
     cfg = yaml.load(ymlfile, Loader=yaml.FullLoader)
