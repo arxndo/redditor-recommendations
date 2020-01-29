@@ -1,9 +1,13 @@
 s3:
     commentsBucket: romeosredditcomments
-    edgesBucket:  redditedges
+    edgesBucket: redditedges
+    nodesBucket: redditnodes
 reddit:
     commentsUrl: https://files.pushshift.io/reddit/comments
     commentsPath: files.pushshift.io/reddit/comments
+spark:
+    appName: edgeComputations
+    master: spark://10.0.0.11:7077
 dates:
     startDate: 2005-12
     endDate: 2011-12

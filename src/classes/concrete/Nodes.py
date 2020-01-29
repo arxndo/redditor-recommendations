@@ -6,6 +6,10 @@ class Nodes(GraphObject, Sequentiable):
  
     name = 'nodes'
 
+    def __init__(self, comments, context, cfg):
+        self.s3BucketName = cfg['s3']['nodesBucket']
+        super().__init__(comments, context)
+
     def transform(self, date):
         self.df = self.df.groupBy('author') \
                          .agg( {'score' : 'sum'} ) \

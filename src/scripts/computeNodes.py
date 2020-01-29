@@ -1,28 +1,19 @@
 import sys
-sys.path.insert(0, 'src/classes/abstract')
-sys.path.insert(0, 'src/classes/concrete')
-sys.path.insert(0, 'src/classes')
+sys.os.environ['PYSPARK_PYTHON'] = '/usr/bin/python3.5'
+sys.os.environ["PYSPARKDRIVER_PYTHON"]= "/usr/bin/python3.5"
+
 from Comments import Comments
 from MyContext import MyContext
 from Nodes import Nodes
-import yaml
 
+cfg = Configuration.configuration('config.yml')
 
-with open('config.yml', 'r') as ymlfile:
-    cfg = yaml.load(ymlfile, Loader=yaml.FullLoader)
+comments = Comments(cfg)
 
+context = MyContext().context(cfg)
 
-comments = Comments( comment_url = cfg['reddit']['comments_url'], \
-                           comment_path = cfg['reddit']['comments_path'], \
-                           s3BucketName = cfg['s3']['commentsBucket'] )
+nodes = Nodes(context, comments, cfg)
 
+nodes.process(cfg['dates']['startDate'], cfg['dates']['endDate'])
 
-context = MyContext().context()
-
-startDate = '2005-12'
-endDate = '2006-02'
-nodes = Nodes(context, comments)
-
-#nodes.process(startDate, endDate) \
-nodes.merge(startDate, endDate)
 
