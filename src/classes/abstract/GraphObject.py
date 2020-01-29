@@ -16,5 +16,5 @@ class GraphObject(Sequentiable):
         return self
 
     def write(self, date):
-        self.df.write.parquet('s3a://%s/nonMerged/%s' \
+        self.df.write.parquet('s3a://%s/%s' \
             % (self.outBucket, date), mode='overwrite')
