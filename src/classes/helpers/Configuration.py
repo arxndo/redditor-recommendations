@@ -2,7 +2,7 @@ import yaml
 
 class Configuration:
     
-    @abstractmethod
+    @staticmethod
     def configuration(configName):
 
         with open(configName, 'r') as ymlfile:
