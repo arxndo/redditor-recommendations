@@ -10,7 +10,7 @@ cfg = Configuration.configuration('config.yml')
 
 comments = Comments(cfg)
 
-context = MyContext().context(cfg)
+context = MyContext().context(cfg, 'nodeCompute')
 
 nodes = Nodes(context, comments, cfg)
 

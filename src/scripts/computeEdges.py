@@ -12,9 +12,9 @@ cfg = Configuration.configuration('config.yml')
 
 comments = Comments(cfg)
 
-context = MyContext().context(cfg)
+context = MyContext().context(cfg, 'edgeCompute')
 
-edges = Edges(context, comments, cfg['s3']['edgesBucket'])
+edges = Edges(context, comments, cfg)
 
 edges.process(cfg['dates']['startDate'], cfg['dates']['endDate'])
 

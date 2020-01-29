@@ -4,10 +4,10 @@ from pyspark.sql import HiveContext
 class MyContext:
     
     @staticmethod
-    def context(cfg):
+    def context(cfg, appName):
         sparkContext = SparkSession \
        	          .builder \
-                  .appName(cfg['spark']['appName']) \
+                  .appName(appName) \
                   .master(cfg['spark']['master']) \
                   .getOrCreate() \
                   .sparkContext

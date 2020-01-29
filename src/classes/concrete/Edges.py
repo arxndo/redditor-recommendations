@@ -9,8 +9,9 @@ class Edges(GraphObject):
     name = 'edges'
 
     def __init__(self, comments, context, cfg):
-        self.s3BucketName = cfg['s3']['edgesBucket']
-        super().__init__(comments, context)
+        super().__init__(comments, context \
+                            cfg['s3']['inBucket'], \
+                            cfg['s3']['outBucket'])
 
     def transform(self, date):
         self.df = self.df.where('author != "[deleted]"') \
@@ -48,9 +49,5 @@ class Edges(GraphObject):
             .withColumnRenamed('sum(weight)', 'weight') \
             .sort(F.desc('weight')) \
             .write \
-            .parquet('data/%s/%s_%s' % (self.name, startDate, endDate))
-
-        
-        os.system('aws s3 mv data/%s/%s_%s s3://%s/merged/%s_%s/ --recursive' \
-            % (self.name, startDate, endDate, self.s3BucketName, startDate, endDate))
-
+            .parquet('s3a://%s/%s_%s' \
+                % (self.outBucket, startDate, endDate))

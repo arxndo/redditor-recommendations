@@ -1,6 +1,6 @@
 from Sequentiable import Sequentiable
 
-class Comments(Sequentiable):
+class RawComments(Sequentiable):
 
     def __init__(self, cfg):
 
