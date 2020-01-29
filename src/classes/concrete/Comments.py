@@ -1,12 +1,14 @@
-import os
 from Sequentiable import Sequentiable
 
 class Comments(Sequentiable):
 
-    def __init__(self, comment_url, comment_path, s3BucketName):
-        self.comment_url = comment_url
-        self.s3BucketName = s3BucketName
-        self.comment_path = comment_path
+    def __init__(self, commentsUrl, commentsPath, s3BucketName):
+        with open('config.yml', 'r') as ymlfile:
+            cfg = yaml.load(ymlfile, Loader=yaml.FullLoader)
+
+        self.commentsUrl = cfg['reddit']['commentsUrl']
+        self.commentsPath = cfg['reddit']['commentsPath']
+        self.s3BucketName = cfg['s3']['commentsBucket']
 
     def ingest(self, date):
         self.download(date)
@@ -21,19 +23,19 @@ class Comments(Sequentiable):
         self.toS3(date)
 
     def download(self, date):
-        os.system( "wget -r --no-parent -A 'RC_%s*' %s" \
-            %  (date, self.comment_url) ) 
+        sys.os.system( "wget -r --no-parent -A 'RC_%s*' %s" \
+            %  (date, self.commentsUrl) ) 
 
     def unzip(self, date):
-        os.system('bzip2 -d %s/RC_%s.*' \
-                % (self.comment_path, date) )
+        sys.os.system('bzip2 -d %s/RC_%s.*' \
+                % (self.commentsPath, date) )
 
     def toCurrentDirectory(self, date):
-        os.system('mv %s/RC_%s .' \
-                % (self.comment_path, date) )
+        sys.os.system('mv %s/RC_%s .' \
+                % (self.commentsPath, date) )
 
     def toS3(self, date):
-        os.system("aws s3 mv RC_%s s3://%s" \
+        sys.os.system("aws s3 mv RC_%s s3://%s" \
             % (date, self.s3BucketName ) )
 
     def dataFrame(self, context, date):
