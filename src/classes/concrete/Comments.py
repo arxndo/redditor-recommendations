@@ -2,9 +2,7 @@ from Sequentiable import Sequentiable
 
 class Comments(Sequentiable):
 
-    def __init__(self, commentsUrl, commentsPath, s3BucketName):
-        with open('config.yml', 'r') as ymlfile:
-            cfg = yaml.load(ymlfile, Loader=yaml.FullLoader)
+    def __init__(self, cfg):
 
         self.commentsUrl = cfg['reddit']['commentsUrl']
         self.commentsPath = cfg['reddit']['commentsPath']

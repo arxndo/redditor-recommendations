@@ -3,7 +3,6 @@ sys.os.environ['PYSPARK_PYTHON'] = '/usr/bin/python3.5'
 sys.os.environ["PYSPARKDRIVER_PYTHON"]= "/usr/bin/python3.5"
 
 from Comments import Comments
-from Calendar import Calendar
 from MyContext import MyContext
 from Edges import Edges
 from Configuration import Configuration
@@ -14,9 +13,7 @@ comments = Comments(cfg)
 
 context = MyContext().context(cfg)
 
-edges = Edges(context, comments, cfg['s3']['edgesBucket'])
+edges = Edges(context, comments, cfg)
 
-edges.process(cfg['dates']['startDate'], cfg['dates']['endDate'])
-
-#edges.merge(cfg['dates']['startDate'], cfg['dates']['endDate'])
+edges.merge(cfg['dates']['startDate'], cfg['dates']['endDate'])
 

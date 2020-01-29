@@ -1,6 +1,7 @@
 s3:
     commentsBucket: romeosredditcomments
-    edgesBucket:  redditedges
+    edgesBucket: redditedges
+    nodesBucket: redditnodes
 reddit:
     commentsUrl: https://files.pushshift.io/reddit/comments
     commentsPath: files.pushshift.io/reddit/comments

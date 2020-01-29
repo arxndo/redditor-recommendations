@@ -8,6 +8,10 @@ class Edges(GraphObject):
  
     name = 'edges'
 
+    def __init__(self, comments, context, cfg):
+        self.s3BucketName = cfg['s3']['edgesBucket']
+        super().__init__(comments, context)
+
     def transform(self, date):
         self.df = self.df.where('author != "[deleted]"') \
                       .groupBy("author") \
