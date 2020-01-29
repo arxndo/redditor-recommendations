@@ -2,16 +2,15 @@ from Sequentiable import Sequentiable
 
 class CleanComments(Sequentiable):
 
-    def __init__(self, cfg):
+    def __init__(self, cfg, context):
 
-        self.commentsUrl = cfg['reddit']['commentsUrl']
-        self.commentsPath = cfg['reddit']['commentsPath']
-        self.rawCommentsBucket = cfg['s3']['rawCommentsBucket']
-        self.cleanCommentsBucket = cfg['s3']['cleanCommentsBucket']
+        self.context = context
+        self.inBucket = cfg['s3']['rawCommentsBucket']
+        self.outBucket = cfg['s3']['cleanCommentsBucket']
 
     def ingest(self, date):
         self.df = self.context.read.json('s3a://%s/RC_%s' \
-                % (self.rawCommentsBucket, date))
+                % (self.inBucket, date))
         return self
 
     def transform(self, date):
@@ -23,4 +22,4 @@ class CleanComments(Sequentiable):
         self.df \
             .write \
             .parquet('s3a://%s/%s' \
-                % (self.cleanCommentsBucket, date), mode='overwrite')
+                % (self.outBucket, date), mode='overwrite')

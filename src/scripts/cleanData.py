@@ -10,7 +10,7 @@ cfg = Configuration.configuration('config.yml')
 
 context = MyContext().context(cfg, 'cleanData')
 
-cleanComments = CleanComments(context, cfg)
+cleanComments = CleanComments(cfg, context)
 
 cleanComments.process(cfg['dates']['startDate'], cfg['dates']['endDate'])
 

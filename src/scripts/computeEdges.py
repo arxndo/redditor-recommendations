@@ -10,11 +10,9 @@ from Configuration import Configuration
 
 cfg = Configuration.configuration('config.yml')
 
-comments = Comments(cfg)
-
 context = MyContext().context(cfg, 'edgeCompute')
 
-edges = Edges(context, comments, cfg)
+edges = Edges(cfg, context)
 
 edges.process(cfg['dates']['startDate'], cfg['dates']['endDate'])
 

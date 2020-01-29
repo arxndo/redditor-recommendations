@@ -1,15 +1,12 @@
 from pyspark.sql import functions as F
-from Sequentiable import Sequentiable
 from GraphObject import GraphObject
-from Calendar import Calendar
-import os
 
 class Edges(GraphObject):
  
-    def __init__(self, context, cfg):
+    def __init__(self, cfg, context):
         super().__init__(context \
-                        cfg['s3']['inBucket'], \
-                        cfg['s3']['outBucket'])
+                        cfg['s3']['cleanCommentsBucket'], \
+                        cfg['s3']['edgesBucket'])
 
     def transform(self, date):
         self.df = self.df.where('author != "[deleted]"') \
@@ -32,20 +29,4 @@ class Edges(GraphObject):
                                     'weight') \
                  .where('weight > 0') \
 
-
         return self
-
-
-    def merge(self, startDate, endDate):
-
-        df = self.context \
-            .read \
-            .parquet \
-            .load(Calendar.paths(self.name, startDate, endDate)) \
-            .groupBy('author_1', 'author_2') \
-            .agg( {'weight' : 'sum'} ) \
-            .withColumnRenamed('sum(weight)', 'weight') \
-            .sort(F.desc('weight')) \
-            .write \
-            .parquet('s3a://%s/%s_%s' \
-                % (self.outBucket, startDate, endDate))
