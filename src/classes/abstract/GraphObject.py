@@ -4,7 +4,6 @@ class GraphObject(Sequentiable):
 
     def __init__(self, context, inBucket, outBucket):
         self.context = context
-        self.comments = comments
         self.inBucket = inBucket
         self.outBucket = outBucket
 
@@ -13,9 +12,9 @@ class GraphObject(Sequentiable):
                     .read \
                     .parquet \
                     .load('s3a://%s/%s', \
-                        % (self.cleanCommentsBucket, date) )
+                        % (self.inBucket, date) )
         return self
 
     def write(self, date):
         self.df.write.parquet('s3a://%s/nonMerged/%s' \
-            % (self.s3BucketName, date), mode='overwrite')
+            % (self.outBucket, date), mode='overwrite')

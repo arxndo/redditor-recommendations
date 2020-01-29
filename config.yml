@@ -2,6 +2,7 @@ s3:
     rawCommentsBucket: romeosredditcomments
     cleanCommentsBucket: romeostestbucket
     edgesBucket: redditedges
+    mergedEdgesBucket: redditmergededges
     nodesBucket: redditnodes
     testBucket: romeostestbucket
 reddit:

@@ -6,12 +6,10 @@ import os
 
 class Edges(GraphObject):
  
-    name = 'edges'
-
-    def __init__(self, comments, context, cfg):
-        super().__init__(comments, context \
-                            cfg['s3']['inBucket'], \
-                            cfg['s3']['outBucket'])
+    def __init__(self, context, cfg):
+        super().__init__(context \
+                        cfg['s3']['inBucket'], \
+                        cfg['s3']['outBucket'])
 
     def transform(self, date):
         self.df = self.df.where('author != "[deleted]"') \
