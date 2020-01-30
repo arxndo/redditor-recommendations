@@ -4,7 +4,7 @@ from GraphObject import GraphObject
 class Edges(GraphObject):
  
     def __init__(self, cfg, context):
-        super().__init__(context \
+        super().__init__(context, \
                         cfg['s3']['cleanCommentsBucket'], \
                         cfg['s3']['edgesBucket'])
 

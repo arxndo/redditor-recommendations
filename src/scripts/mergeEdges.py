@@ -2,7 +2,7 @@ import sys
 sys.os.environ['PYSPARK_PYTHON'] = '/usr/bin/python3.5'
 sys.os.environ["PYSPARKDRIVER_PYTHON"]= "/usr/bin/python3.5"
 
-from Comments import Comments
+from CleanComments import CleanComments
 from MyContext import MyContext
 from MergedEdges import MergedEdges
 from Configuration import Configuration
@@ -14,4 +14,3 @@ context = MyContext().context(cfg)
 mergedEdges = MergedEdges(context, cfg)
 
 edges.merge(cfg['dates']['startDate'], cfg['dates']['endDate'])
-

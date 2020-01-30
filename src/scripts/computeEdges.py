@@ -1,8 +1,8 @@
-import sys
-sys.os.environ['PYSPARK_PYTHON'] = '/usr/bin/python3.5'
-sys.os.environ["PYSPARKDRIVER_PYTHON"]= "/usr/bin/python3.5"
+import os
+os.environ['PYSPARK_PYTHON'] = '/usr/bin/python3.5'
+os.environ["PYSPARKDRIVER_PYTHON"]= "/usr/bin/python3.5"
 
-from Comments import Comments
+from CleanComments import CleanComments
 from Calendar import Calendar
 from MyContext import MyContext
 from Edges import Edges

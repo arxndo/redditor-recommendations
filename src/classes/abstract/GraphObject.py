@@ -10,9 +10,8 @@ class GraphObject(Sequentiable):
     def ingest(self, date):
         self.df = self.context \
                     .read \
-                    .parquet \
-                    .load('s3a://%s/%s', \
-                        % (self.inBucket, date) )
+                    .parquet('s3a://%s/%s' \
+                        % (self.inBucket, date))
         return self
 
     def write(self, date):

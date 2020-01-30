@@ -1,1 +1,1 @@
-python3 ~/redditor/recommendations/src/scripts/computeEdges.py
+python3 ~/redditor-recommendations/src/scripts/computeEdges.py
