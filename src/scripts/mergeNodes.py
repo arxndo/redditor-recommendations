@@ -1,20 +1,19 @@
-import sys
 sys.os.environ['PYSPARK_PYTHON'] = '/usr/bin/python3.5'
 sys.os.environ["PYSPARKDRIVER_PYTHON"]= "/usr/bin/python3.5"
 
 from Comments import Comments
-from Calendar import Calendar
 from MyContext import MyContext
-from Edges import Edges
+from Nodes import Nodes
 from Configuration import Configuration
 
 cfg = Configuration.configuration('config.yml')
 
-context = MyContext().context(cfg, 'edgeCompute')
+comments = Comments(cfg)
 
-edges = Edges(cfg, context)
+context = MyContext().context(cfg)
 
-edges.process(cfg['dates']['startDate'], cfg['dates']['endDate'])
+nodes = Nodes(context, comments, cfg)
 
-#edges.merge(cfg['dates']['startDate'], cfg['dates']['endDate'])
+nodes.merge(cfg['dates']['startDate'], cfg['dates']['endDate'])
+
 
