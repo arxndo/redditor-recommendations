@@ -9,6 +9,7 @@ class MyContext:
        	          .builder \
                   .appName(appName) \
                   .master(cfg['spark']['master']) \
+                  .config('spark.executor.memory', '2G') \
                   .getOrCreate() \
                   .sparkContext
 

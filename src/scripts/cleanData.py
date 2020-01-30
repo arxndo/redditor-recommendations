@@ -8,7 +8,8 @@ from CleanComments import CleanComments
 
 cfg = Configuration.configuration('config.yml')
 
-context = MyContext().context(cfg, 'cleanData')
+context = MyContext().context(cfg, 'cleanData_%s_%s' \
+                        % (cfg['dates']['startDate'], cfg['dates']['endDate']))
 
 cleanComments = CleanComments(cfg, context)
 

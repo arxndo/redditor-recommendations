@@ -1,0 +1,6 @@
+eval 'sudo apt-get update'
+eval 'sudo apt install python3-pip'
+eval 'pip3 install pyspark'
+eval 'pip3 install datetime'
+eval 'pip3 install monthdelta'
+eval 'pip3 install pyyaml'
