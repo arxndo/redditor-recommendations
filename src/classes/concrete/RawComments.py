@@ -1,3 +1,4 @@
+import os
 from Sequentiable import Sequentiable
 
 class RawComments(Sequentiable):
@@ -6,37 +7,36 @@ class RawComments(Sequentiable):
 
         self.commentsUrl = cfg['reddit']['commentsUrl']
         self.commentsPath = cfg['reddit']['commentsPath']
-        self.s3BucketName = cfg['s3']['commentsBucket']
+        self.outBucket = cfg['s3']['rawCommentsBucket']
 
     def ingest(self, date):
+        print('\nIngesting %s' % date)
         self.download(date)
         return self
 
     def transform(self, date):
+        print('Transforming %s' % date)
         self.unzip(date)
         return self
 
     def write(self, date):
+        print('Writing %s' % date)
         self.toCurrentDirectory(date)
         self.toS3(date)
 
     def download(self, date):
-        sys.os.system( "wget -r --no-parent -A 'RC_%s*' %s" \
+        os.system( "wget -r --no-parent -A 'RC_%s*' %s" \
             %  (date, self.commentsUrl) ) 
 
     def unzip(self, date):
-        sys.os.system('bzip2 -d %s/RC_%s.*' \
+        os.system('bzip2 -d %s/RC_%s.*' \
                 % (self.commentsPath, date) )
 
     def toCurrentDirectory(self, date):
-        sys.os.system('mv %s/RC_%s .' \
+        os.system('mv %s/RC_%s .' \
                 % (self.commentsPath, date) )
 
     def toS3(self, date):
-        sys.os.system("aws s3 mv RC_%s s3://%s" \
-            % (date, self.s3BucketName ) )
-
-    def dataFrame(self, context, date):
-        return context.read.json("s3a://%s/RC_%s" \
-                    % (self.s3BucketName, date) )
+        os.system("aws s3 mv RC_%s s3://%s" \
+            % (date, self.outBucket ) )
 
