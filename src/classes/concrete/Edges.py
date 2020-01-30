@@ -9,7 +9,7 @@ class Edges(GraphObject):
                         cfg['s3']['edgesBucket'])
 
     def transform(self, date):
-        self.df = self.df.where('author != "[deleted]"') \
+        self.df = self.df \
                       .groupBy("author") \
                       .agg(F.collect_set("link_id" )) \
                       .withColumnRenamed('collect_set(link_id)', 'link_ids')

@@ -9,7 +9,8 @@ from Configuration import Configuration
 
 cfg = Configuration.configuration('config.yml')
 
-context = MyContext().context(cfg)
+context = MyContext().context(cfg, 'mergeEdges%s_%s' \
+                        % (cfg['dates']['startDate'], cfg['dates']['endDate']))
 
 mergedEdges = MergedEdges(context, cfg)
 

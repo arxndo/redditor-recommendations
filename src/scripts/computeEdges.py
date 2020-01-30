@@ -10,7 +10,8 @@ from Configuration import Configuration
 
 cfg = Configuration.configuration('config.yml')
 
-context = MyContext().context(cfg, 'edgeCompute')
+context = MyContext().context(cfg, 'computeEdges%s_%s' \
+                        % (cfg['dates']['startDate'], cfg['dates']['endDate']))
 
 edges = Edges(cfg, context)
 

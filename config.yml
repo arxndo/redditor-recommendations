@@ -1,8 +1,7 @@
 s3:
     rawCommentsBucket: romeosredditcomments
     cleanCommentsBucket: redditcleancomments
-    #edgesBucket: redditedges
-    edgesBucket: romeostestbucket
+    edgesBucket: redditedges
     mergedEdgesBucket: redditmergededges
     nodesBucket: redditnodes
     testBucket: romeostestbucket
@@ -13,5 +12,4 @@ spark:
     master: spark://10.0.0.12:7077
 dates:
     startDate: 2005-12
-    endDate: 2006-01
-
+    endDate: 2016-03
