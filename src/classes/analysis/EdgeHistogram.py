@@ -18,7 +18,7 @@ class EdgeHistogram:
     def ingest(self, startDate, endDate):
         """ Read merged edges """
 
-        self.df.read.parquet('s3a://%s/%s_%s' \
+        self.df = self.context.read.parquet('s3a://%s/%s_%s' \
                 % (self.inBucket, startDate, endDate))
         return self
 
@@ -26,7 +26,7 @@ class EdgeHistogram:
     def transform(self):
         """ Create histogram """
 
-        self.df.select('weight')
+        #self.df.select('weight')
         return self
 
 
@@ -34,10 +34,10 @@ class EdgeHistogram:
         """ Save plot to s3 """
 
         self.df.show(20)
-        self.df \
-            .repartition(1) \
-            .write.format('com.databricks.spark.csv') \
-            .save('weight_%s_%s' % (startDate, endDate))
+        #self.df \
+        #    .repartition(1) \
+        #    .write.format('com.databricks.spark.csv') \
+        #    .save('weight_%s_%s' % (startDate, endDate))
 
 
         #fig = self.hist.get_figure()
