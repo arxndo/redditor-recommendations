@@ -1,11 +1,9 @@
-from Calendar import Calendar
-from pandas import pandas
-from matplotlib import pyplot
 
 class EdgeHistogram:
     """ Creates histogram of edge weights"""
  
-    def __init__(self, cfg):
+    def __init__(self, context, cfg):
+        self.context = context
         self.inBucket = cfg['s3']['mergedEdgesBucket']
         self.outBucket = cfg['s3']['analysisBucket']
 
@@ -20,23 +18,32 @@ class EdgeHistogram:
     def ingest(self, startDate, endDate):
         """ Read merged edges """
 
-        self.df = pandas \
-                  .read_parquet('s3a://%s/%s_%s' 
-                        % (self.inBucket, startDate, endDate))
+        self.df.read.parquet('s3a://%s/%s_%s' \
+                % (self.inBucket, startDate, endDate))
         return self
 
 
     def transform(self):
         """ Create histogram """
 
-        self.hist = self.df['weight'].hist()
+        self.df.select('weight')
         return self
 
 
     def write(self, startDate, endDate):
         """ Save plot to s3 """
 
-        fig = self.hist.get_figure()
-        fig.savefig('s3a://%s/%s_%s' \
-                % (self.outBucket, startDate, endDate))
+        self.df.show(20)
+        self.df \
+            .repartition(1) \
+            .write.format('com.databricks.spark.csv') \
+            .save('weight_%s_%s' % (startDate, endDate))
+
+
+        #fig = self.hist.get_figure()
+
+        #fig.savefig('histogram.png')
+
+        #fig.savefig('s3a://%s/%s_%s' \
+        #        % (self.outBucket, startDate, endDate))
 
