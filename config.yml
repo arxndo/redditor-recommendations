@@ -2,9 +2,9 @@ s3:
     rawCommentsBucket: romeosredditcomments
     cleanCommentsBucket: redditcleancomments
     edgesBucket: redditedges
-    mergedEdgesBucket: romeostestbucket
-    #mergedEdgesBucket: redditmergededges
+    mergedEdgesBucket: redditmergededges
     nodesBucket: redditnodes
+    analysisBucket: redditanalysis
     testBucket: romeostestbucket
 reddit:
     commentsUrl: https://files.pushshift.io/reddit/comments
