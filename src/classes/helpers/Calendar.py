@@ -2,26 +2,21 @@ from datetime import datetime
 from monthdelta import monthdelta
 
 class Calendar:
+""" Helper functions for iterating over multiple dates"""
 
-    def s3Paths(name, startDate, endDate):
-
-        paths = []
-        for date in Calendar.dates(startDate, endDate):
-            paths.append('data/%s/%s/*.csv' % (name, date))
-
-        return paths
-
-
-    def paths(name, startDate, endDate):
+    @staticmethod
+    def s3Paths(bucket, startDate, endDate):
+    """ Paths in s3 bucket between two dates"""
 
         paths = []
         for date in Calendar.dates(startDate, endDate):
-            paths.append('data/%s/%s/*.csv' % (name, date))
-
+            paths.append('s3a://%s/%s' % (bucket, date))
         return paths
 
+
+    @staticmethod
     def dates(startDate, endDate):
-
+    """ Iterates through all months between two dates"""
         date = startDate
 
         endDatetime = datetime.strptime(endDate, "%Y-%m")

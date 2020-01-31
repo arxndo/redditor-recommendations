@@ -1,7 +1,8 @@
 from pyspark.sql import functions as F
 from Sequentiable import Sequentiable
 
-class MergedEdges(Sequentiable):
+class MergedEdges:
+""" Merge of edges across multiple months"""
  
     def __init__(self, context, cfg):
         self.context = context
@@ -9,27 +10,30 @@ class MergedEdges(Sequentiable):
         self.outBucket = cfg['s3']['mergedEdgesBucket']
 
 
-    def ingest(self, date)
-        self.df = self.context \
-                    .read \
-                    .parquet \
-                    .load('s3a://%s/%s', \
-                        % (self.inBucket, date))
+    def ingest(self, startDate, endDate):
+        """ Read parquet edge files """
 
-    def transform(self, date):
-        pass
+        paths = Calendar.s3paths(self.inBucket, startDate, endDate)
+        self.df = self.context.read.parquet(*paths)
+        return self
 
-    def write(self, date):
-        pass
 
-    def merge(self):
+    def transform(self):
+        """ Merge by author pairs, add weights """
+
+        self.df = self.df \
+            .groupBy('author_1', 'author_2') \
+            .agg( {'weight' : 'sum'} ) \
+            .withColumnRenamed('sum(weight)', 'weight') 
+        return self
+
+
+    def write(self, startDate, endDate):
+        """ Write to parquet s3 files """
 
         self.df \
-        .groupBy('author_1', 'author_2') \
-        .agg( {'weight' : 'sum'} ) \
-        .withColumnRenamed('sum(weight)', 'weight') \
         .write \
         .parquet('s3a://%s/%s_%s' \
             % (self.outBucket, startDate, endDate))
+        return self
 
-        #.sort(F.desc('weight')) \

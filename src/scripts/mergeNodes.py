@@ -1,5 +1,6 @@
-sys.os.environ['PYSPARK_PYTHON'] = '/usr/bin/python3.5'
-sys.os.environ["PYSPARKDRIVER_PYTHON"]= "/usr/bin/python3.5"
+import os
+os.environ['PYSPARK_PYTHON'] = '/usr/bin/python3.5'
+os.environ["PYSPARKDRIVER_PYTHON"]= "/usr/bin/python3.5"
 
 from CleanComments import CleanComments
 from MyContext import MyContext

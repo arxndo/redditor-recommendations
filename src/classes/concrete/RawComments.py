@@ -3,9 +3,12 @@ from Sequentiable import Sequentiable
 
 
 class RawComments(Sequentiable):
+""" Raw JSON comment data """
 
     def __init__(self, cfg):
-
+    """ Constructor
+        @param cfg: configuration
+    """
         self.commentsUrl = cfg['reddit']['commentsUrl']
         self.commentsPath = cfg['reddit']['commentsPath']
         self.outBucket = cfg['s3']['rawCommentsBucket']
