@@ -13,4 +13,4 @@ spark:
     master: spark://10.0.0.12:7077
 dates:
     startDate: 2005-12
-    endDate: 2009-10
+    endDate: 2006-02

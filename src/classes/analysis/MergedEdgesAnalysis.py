@@ -1,6 +1,6 @@
 
-class EdgeHistogram:
-    """ Creates histogram of edge weights"""
+class MergedEdgeAnalysis:
+    """ Analysis for pruning"""
  
     def __init__(self, context, cfg):
         self.context = context
@@ -26,14 +26,15 @@ class EdgeHistogram:
     def transform(self):
         """ Create histogram """
 
-        self.df = self.df.select('weight') \
-                    .orderBy('weight')
+        self.df = self.df.select('weight')
+
+        print('%d, %d' % (0, self.df.count()))
+        for i in range(1,100):
+            self.df = self.df.where('weight > %d' % i)
+            print('%d, %d' % (i, self.df.count()))
         return self
 
 
     def write(self, startDate, endDate):
         """ Save plot to s3 """
-
-        self.df.write.csv('s3://%s/weight_%s_%s' \
-             % (self.outBucket, startDate, endDate) )
-
+        pass
