@@ -13,5 +13,4 @@ context = MyContext().context(cfg, 'mergeEdges%s_%s' \
 
 mergedEdges = MergedEdges(context, cfg)
 
-mergedEdges.process(cfg['dates']['startDate'], cfg['dates']['endDate']) \
-           .merge(cfg['dates']['startDate'], cfg['dates']['endDate'])
+mergedEdges.process(cfg['dates']['startDate'], cfg['dates']['endDate'])

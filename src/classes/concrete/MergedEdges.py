@@ -1,13 +1,21 @@
 from pyspark.sql import functions as F
 from Sequentiable import Sequentiable
+from Calendar import Calendar
 
 class MergedEdges:
-""" Merge of edges across multiple months"""
+    """ Merge of edges across multiple months"""
  
     def __init__(self, context, cfg):
         self.context = context
         self.inBucket = cfg['s3']['edgesBucket']
         self.outBucket = cfg['s3']['mergedEdgesBucket']
+
+
+    def process(self, startDate, endDate):
+        """ Merge from startDate to endDate"""
+        self.ingest(startDate, endDate) \
+            .transform() \
+            .write(startDate, endDate)
 
 
     def ingest(self, startDate, endDate):
@@ -34,6 +42,6 @@ class MergedEdges:
         self.df \
         .write \
         .parquet('s3a://%s/%s_%s' \
-            % (self.outBucket, startDate, endDate))
+            % (self.outBucket, startDate, endDate), mode='overwrite')
         return self
 
