@@ -1,1 +1,1 @@
-python3 ~/redditor-recommendations/src/scripts/analyzeMergedEdges.py
+python3 ~/redditor-recommendations/src/scripts/analyzeEdges.py

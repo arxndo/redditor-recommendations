@@ -27,6 +27,6 @@ class Edges(GraphObject):
                        F.size(F.array_intersect('link_ids_1', 'link_ids_2'))) \
                  .withColumnRenamed('size(array_intersect(link_ids_1, link_ids_2))', \
                                     'weight') \
-                 .where('weight > 0') \
+                 .where('weight > 5') \
 
         return self
