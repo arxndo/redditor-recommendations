@@ -30,3 +30,11 @@ class Edges(GraphObject):
                  .where('weight > 5') \
 
         return self
+
+    def write(self, date):
+        n = 200 # number of repartitions
+        self.df = self.df.repartition(n)
+        self.df \
+            .write \
+            .parquet('s3a://%s/%s' \
+                % (self.outBucket, date), mode='overwrite')
