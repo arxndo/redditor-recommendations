@@ -1,10 +1,11 @@
 s3:
     rawCommentsBucket: romeosredditcomments
     cleanCommentsBucket: redditcleancomments
-    edgesBucket: romeostestbucket
-    #edgesBucket: redditedges5
+    #edgesBucket: romeostestbucket
+    edgesBucket: redditedges5
     mergedEdgesBucket: redditmergededges
     nodesBucket: redditnodes
+    mergedNodesBucket: redditmergednodes
     analysisBucket: redditanalysis
     testBucket: romeostestbucket
 reddit:
