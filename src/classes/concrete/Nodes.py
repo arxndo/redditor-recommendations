@@ -1,32 +1,25 @@
+from pyspark.sql import functions as F
 from GraphObject import GraphObject
-from Sequentiable import Sequentiable
-from Calendar import Calendar
 
-class Nodes(GraphObject, Sequentiable):
+class Nodes(GraphObject):
  
-    name = 'nodes'
-
-    def __init__(self, comments, context, cfg):
-        self.s3BucketName = cfg['s3']['nodesBucket']
-        super().__init__(comments, context)
+    def __init__(self, cfg, context):
+        super().__init__(context, \
+                        cfg['s3']['cleanCommentsBucket'], \
+                        cfg['s3']['nodesBucket'])
+        self.partitions = cfg['tuning']['nodePartitions']
 
     def transform(self, date):
-        self.df = self.df.groupBy('author') \
-                         .agg( {'score' : 'sum'} ) \
-                         .withColumnRenamed('sum(score)', 'score')
+        self.df = self.df \
+                .select('author', 'score') \
+                .groupBy('author') \
+                .agg(F.sum('score').alias('score'))
         return self
 
-
-    def merge(self, startDate, endDate):
-
-        df = self.context \
-            .read \
-            .format('csv') \
-            .option('header', 'true') \
-            .load(Calendar.paths(self.name, startDate, endDate)) \
-            .groupBy('author') \
-            .agg( {'score' : 'sum'} ) \
-            .withColumnRenamed('sum(score)', 'score') \
+    def write(self, date):
+        n = self.partitions
+        self.df = self.df.repartition(n)
+        self.df \
             .write \
-            .option('header', 'true') \
-            .csv('data/%s/%s_%s' % (self.name, startDate, endDate))
+            .parquet('s3a://%s/%s' \
+                % (self.outBucket, date), mode='overwrite')

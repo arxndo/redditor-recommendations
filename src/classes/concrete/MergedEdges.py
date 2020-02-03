@@ -9,7 +9,7 @@ class MergedEdges:
         self.context = context
         self.inBucket = cfg['s3']['edgesBucket']
         self.outBucket = cfg['s3']['mergedEdgesBucket']
-
+        self.truncation = cfg['tuning']['truncation']
 
     def process(self, startDate, endDate):
         """ Merge from startDate to endDate"""
@@ -40,8 +40,11 @@ class MergedEdges:
         """ Write to parquet s3 files """
 
         self.df \
+        .repartition(1) \
         .write \
-        .parquet('s3a://%s/%s_%s' \
-            % (self.outBucket, startDate, endDate), mode='overwrite')
+        .option('header', 'true') \
+        .mode('overwrite') \
+        .csv('s3a://%s/%d_%s_%s' \
+            % (self.outBucket, self.truncation, startDate, endDate))
         return self
 

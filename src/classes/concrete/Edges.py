@@ -7,6 +7,8 @@ class Edges(GraphObject):
         super().__init__(context, \
                         cfg['s3']['cleanCommentsBucket'], \
                         cfg['s3']['edgesBucket'])
+        self.truncation = cfg['tuning']['truncation']
+        self.partitions = cfg['tuning']['edgePartitions']
 
     def transform(self, date):
         self.df = self.df \
@@ -27,12 +29,12 @@ class Edges(GraphObject):
                        F.size(F.array_intersect('link_ids_1', 'link_ids_2'))) \
                  .withColumnRenamed('size(array_intersect(link_ids_1, link_ids_2))', \
                                     'weight') \
-                 .where('weight > 5') \
+                 .where('weight > %d' % self.truncation)
 
         return self
 
     def write(self, date):
-        n = 200 # number of repartitions
+        n = self.partitions
         self.df = self.df.repartition(n)
         self.df \
             .write \

@@ -1,18 +1,17 @@
-import sys
-sys.os.environ['PYSPARK_PYTHON'] = '/usr/bin/python3.5'
-sys.os.environ["PYSPARKDRIVER_PYTHON"]= "/usr/bin/python3.5"
+import os
+os.environ['PYSPARK_PYTHON'] = '/usr/bin/python3.5'
+os.environ["PYSPARKDRIVER_PYTHON"]= "/usr/bin/python3.5"
 
-from Comments import Comments
 from MyContext import MyContext
+from Configuration import Configuration
 from Nodes import Nodes
 
 cfg = Configuration.configuration('config.yml')
 
-comments = Comments(cfg)
+context = MyContext().context(cfg, 'computeNodes%s_%s' \
+                        % (cfg['dates']['startDate'], cfg['dates']['endDate']))
 
-context = MyContext().context(cfg, 'nodeCompute')
-
-nodes = Nodes(context, comments, cfg)
+nodes = Nodes(cfg, context)
 
 nodes.process(cfg['dates']['startDate'], cfg['dates']['endDate'])
 
