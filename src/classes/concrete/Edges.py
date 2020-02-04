@@ -12,32 +12,25 @@ class Edges(GraphObject):
 
     def transform(self, date):
         self.df = self.df \
-                      .groupBy("author") \
-                      .agg(F.collect_set("link_id" ).alias('link_ids'))
+                      .groupBy('author') \
+                      .agg(F.collect_set("link_id" ).alias('link_ids')) \
+                      .repartition('author')
 
-        self.df = self.df.repartition(200, F.col('link_ids'))
-
-        df1 = self.df.withColumnRenamed('author', 'author_1') \
-                     .withColumnRenamed('link_ids', 'link_ids_1')
-
-        df2 = self.df.withColumnRenamed('author', 'author_2') \
-                     .withColumnRenamed('link_ids', 'link_ids_2')
-
-        self.df = df1.crossJoin(df2) \
-                 .where(df1.author_1 < df2.author_2) \
-                 .select('author_1', \
-                       'author_2', \
-                       F.size(F.array_intersect('link_ids_1', 'link_ids_2')) \
-                            .alias('weight'))
-
-        #self.df = self.df.repartition(200)
-        self.df = self.df.where('weight > %d' % self.truncation)
+        self.df = self.df.alias('df1') \
+                .join(self.df.alias('df2')) \
+                .where('df1.author < df2.author') \
+                .select(F.col('df1.author').alias('author_1'), \
+                    F.col('df2.author').alias('author_2'), \
+                    F.size(F.array_intersect('df1.link_ids',
+                                             'df2.link_ids')) \
+                        .alias('weight')) \
+                .where('weight > %d' % self.truncation)
 
         return self
 
     def write(self, date):
-        n = 1
-        self.df = self.df.repartition(n, F.col('weight'))
+        n = self.partitions
+        self.df = self.df.repartition(n)
         self.df \
             .write \
             .parquet('s3a://%s/%s' \
