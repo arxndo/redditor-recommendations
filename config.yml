@@ -1,8 +1,8 @@
 s3:
     rawCommentsBucket: romeosredditcomments
     cleanCommentsBucket: redditcleancomments
-    #edgesBucket: romeostestbucket
-    edgesBucket: redditedges5
+    edgesBucket: romeostestbucket
+    #edgesBucket: redditedges5
     mergedEdgesBucket: redditmergededges
     nodesBucket: redditnodes
     mergedNodesBucket: redditmergednodes
@@ -14,8 +14,8 @@ reddit:
 spark:
     master: spark://10.0.0.12:7077
 dates:
-    startDate: 2005-12
-    endDate: 2006-02
+    startDate: 2008-01
+    endDate: 2008-01
 tuning:
     truncation: 5
     edgePartitions: 1
