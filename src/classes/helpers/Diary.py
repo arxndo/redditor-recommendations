@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 from monthdelta import monthdelta
+from calendar import monthrange
 
 class Diary:
     """ Helper functions for iterating over multiple dates"""
@@ -13,6 +14,11 @@ class Diary:
             paths.append('s3a://%s/%s' % (bucket, date))
         return paths
 
+    @staticmethod
+    def endOfMonth(date):
+        date = datetime.strptime(date, '%Y-%m')
+        (_, lastDay) = monthrange(date.year, date.month)
+        return '%d-%.2d-%.2d' % (date.year, date.month, lastDay)
 
     @staticmethod
     def toUTC(date):
