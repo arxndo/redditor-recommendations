@@ -1,7 +1,8 @@
 from pyspark.sql import functions as F
 from GraphObject import GraphObject
+from Sequentiable import Sequentiable
 
-class Nodes(GraphObject):
+class Nodes(GraphObject, Sequentiable):
  
     def __init__(self, cfg, context):
         super().__init__(context, \

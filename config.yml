@@ -1,7 +1,9 @@
 s3:
     rawCommentsBucket: romeosredditcomments
     cleanCommentsBucket: redditcleancomments
+    dailyCommentsBucket: redditdailycomments
     edgesBucket: redditedges5
+    dailyEdgesBucket: redditdailyedges
     mergedEdgesBucket: redditmergededges
     nodesBucket: redditnodes
     mergedNodesBucket: redditmergednodes

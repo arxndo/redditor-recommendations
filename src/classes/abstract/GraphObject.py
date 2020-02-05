@@ -1,6 +1,5 @@
-from Sequentiable import Sequentiable
 
-class GraphObject(Sequentiable):
+class GraphObject:
 
     def __init__(self, context, inBucket, outBucket):
         self.context = context
