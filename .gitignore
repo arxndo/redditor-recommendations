@@ -1,8 +1,8 @@
 files.pushshift.io
 small_tests
 data
-*.yml
-config.yml
+#*.yml
+#config.yml
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

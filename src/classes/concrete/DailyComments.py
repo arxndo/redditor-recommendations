@@ -20,7 +20,7 @@ class DailyComments(Sequentiable):
             nextDayUTC = Diary.toUTC(Diary.nextDate(day))
 
             self.df \
-                .where('created_utc < %d' % nextDayUTC)
+                .where('created_utc < %d' % nextDayUTC) \
                 .write \
                 .parquet('s3a://%s/%s' \
                     % (self.outBucket, day), mode='overwrite')
