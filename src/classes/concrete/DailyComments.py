@@ -17,15 +17,13 @@ class DailyComments(Sequentiable):
     def transform(self, date):
         
         for day in Diary.monthDates(date): 
-            print(day)
             nextDayUTC = Diary.toUTC(Diary.nextDate(day))
 
             self.df \
-                .where('created_utc < %d' % nextDayUTC) \
-                .show()
-                #.write \
-                #.parquet('s3a://%s/%s' \
-                #    % (self.outBucket, day), mode='overwrite')
+                .where('created_utc < %d' % nextDayUTC)
+                .write \
+                .parquet('s3a://%s/%s' \
+                    % (self.outBucket, day), mode='overwrite')
 
             self.df = self.df.where('created_utc >= %d' % nextDayUTC)
 

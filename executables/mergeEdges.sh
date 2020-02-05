@@ -1,1 +1,2 @@
-python3 ~/redditor-recommendations/src/scripts/mergeEdges.py
+className="MergedEdges"
+python3 ~/redditor-recommendations/src/scripts/run.py "$className"

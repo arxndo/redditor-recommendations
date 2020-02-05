@@ -1,1 +1,2 @@
-python3 ~/redditor-recommendations/src/scripts/createEdgeHistogram.py
+className="EdgeHistogram"
+python3 ~/redditor-recommendations/src/scripts/run.py "$className"

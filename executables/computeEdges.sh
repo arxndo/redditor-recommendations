@@ -1,1 +1,2 @@
-python3 ~/redditor-recommendations/src/scripts/computeEdges.py
+className="MonthlyEdges"
+python3 ~/redditor-recommendations/src/scripts/run.py "$sclassName"

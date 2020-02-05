@@ -1,1 +1,2 @@
-python3 ~/redditor-recommendations/src/scripts/computeNodes.py
+className="Nodes"
+python3 ~/redditor-recommendations/src/scripts/run.py "$className"
