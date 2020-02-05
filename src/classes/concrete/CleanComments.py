@@ -15,12 +15,11 @@ class CleanComments(Sequentiable):
 
     def transform(self, date):
         self.df = self.df \
-                      .select('author', 'link_id', 'score', 'subreddit') \
+                      .select('author', 'link_id', 'score', 'created_utc') \
                       .where('author != "[deleted]"')
         return self
 
     def write(self, date):
-        #self.df.show()
         self.df \
             .write \
             .parquet('s3a://%s/%s' \
