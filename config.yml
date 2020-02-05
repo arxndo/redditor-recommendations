@@ -15,9 +15,9 @@ reddit:
 spark:
     master: spark://10.0.0.12:7077
 dates:
-    startDate: 2011-04
-    endDate: 2016-03
+    startDate: 2005-12
+    endDate: 2005-12
 tuning:
-    truncation: 5
+    truncation: 1
     edgePartitions: 1
     nodePartitions: 1
