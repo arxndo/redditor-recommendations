@@ -1,7 +1,6 @@
-from Sequence import Sequence
+from Exectuor import Executor
 import sys
 
 className = sys.argv[1]
 
-Sequence.run(className)
-
+Executor.run(className)

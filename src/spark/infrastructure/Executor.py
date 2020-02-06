@@ -2,7 +2,7 @@ import os
 from Configuration import Configuration
 from MyContext import MyContext
 
-class Sequence:
+class Executor:
 
     @staticmethod
     def run(className):
