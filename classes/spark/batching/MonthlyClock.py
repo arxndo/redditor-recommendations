@@ -14,7 +14,7 @@ class MonthlyClock:
         return paths
 
 
-    def dates(startDate, endDate):
+    def dates(self, startDate, endDate):
         """ Iterates through all months between two dates"""
         date = startDate
 

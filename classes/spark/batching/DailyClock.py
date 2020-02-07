@@ -15,6 +15,10 @@ class DailyClock:
         return paths
 
     @staticmethod
+    def startOfMonth(date):
+        return date + '-01'
+
+    @staticmethod
     def endOfMonth(date):
         date = datetime.strptime(date, '%Y-%m')
         (_, lastDay) = monthrange(date.year, date.month)
@@ -43,14 +47,13 @@ class DailyClock:
                     + timedelta(1)) \
                      .strftime('%Y-%m-%d')
 
-    @staticmethod
-    def dates(startDate, endDate):
+    def dates(self, startDate, endDate):
         """ Iterates through all months between two dates"""
-        date = startDate
+        date = DailyClock.startOfMonth(startDate)
 
-        endDatetime = datetime.strptime(endDate, "%Y-%m-%d")
+        endDate = DailyClock.endOfMonth(endDate)
 
-        while (datetime.strptime(date, "%Y-%m-%d") <= endDatetime) :
+        while (datetime.strptime(date, "%Y-%m-%d") <= endDate) :
             yield date
 
             date = (datetime.strptime(date, "%Y-%m-%d") \

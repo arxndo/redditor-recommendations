@@ -1,12 +1,7 @@
+from Batches import Batches
 from DailyClock import DailyClock
 
-class DailyBatches:
+class DailyBatches(Batches):
 
-    def process(self, startDate, endDate):
-        startDate = startDate + '-01'
-        endDate =  DailyClock.endOfMonth(endDate)
-        for date in DailyClock.dates(startDate, endDate):
-              self.ingest(date) \
-                  .transform(date) \
-                  .write(date)
-        return self
+    def __init__(self):
+        super().__init__(self, DailyClock())
