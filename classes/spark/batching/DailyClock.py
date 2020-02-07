@@ -53,7 +53,9 @@ class DailyClock:
 
         endDate = DailyClock.endOfMonth(endDate)
 
-        while (datetime.strptime(date, "%Y-%m-%d") <= endDate) :
+        endDateStamp = datetime.strptime(endDate, '%Y-%m-%d')
+
+        while (datetime.strptime(date, '%Y-%m-%d') <= endDateStamp) :
             yield date
 
             date = (datetime.strptime(date, "%Y-%m-%d") \
