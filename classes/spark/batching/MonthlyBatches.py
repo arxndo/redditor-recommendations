@@ -1,6 +1,9 @@
-from Calendar import Calendar
+from Batches import Batches
+from MonthlyClock import MonthlyClock
 
-class Sequentiable:
+class MonthlyBatches(Batches):
+
+    def __init_(self, clock)
 
     def process(self, startDate, endDate):
         for date in Calendar.dates(startDate, endDate):

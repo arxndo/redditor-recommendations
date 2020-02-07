@@ -1,11 +1,11 @@
-from Diary import Diary
+from DailyClock import DailyClock
 
-class Quotidian:
+class DailyBatches:
 
     def process(self, startDate, endDate):
         startDate = startDate + '-01'
-        endDate =  Diary.endOfMonth(endDate)
-        for date in Diary.dates(startDate, endDate):
+        endDate =  DailyClock.endOfMonth(endDate)
+        for date in DailyClock.dates(startDate, endDate):
               self.ingest(date) \
                   .transform(date) \
                   .write(date)

@@ -14,6 +14,10 @@ reddit:
     commentsPath: files.pushshift.io/reddit/comments
 spark:
     master: spark://10.0.0.12:7077
+neo4j:
+    address: none
+flask:
+    address: none
 dates:
     startDate: 2006-01
     endDate: 2016-03

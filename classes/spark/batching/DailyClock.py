@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 from monthdelta import monthdelta
 from calendar import monthrange
 
-class Diary:
+class DailyClock:
     """ Helper functions for iterating over multiple dates"""
 
     @staticmethod
@@ -10,7 +10,7 @@ class Diary:
         """ Paths in s3 bucket between two dates"""
 
         paths = []
-        for date in Diary.dates(startDate, endDate):
+        for date in DailyClock.dates(startDate, endDate):
             paths.append('s3a://%s/%s' % (bucket, date))
         return paths
 

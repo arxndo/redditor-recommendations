@@ -1,7 +1,7 @@
 from Edges import Edges
-from Quotidian import Quotidian
+from DailyBatches import DailyBatches
 
-class DailyEdges(Edges, Quotidian):
+class DailyEdges(Edges, DailyBatches):
  
     def __init__(self, cfg, context):
         super().__init__(cfg, context, \

@@ -1,7 +1,7 @@
 from datetime import datetime
 from monthdelta import monthdelta
 
-class Calendar:
+class MonthlyClock:
     """ Helper functions for iterating over multiple dates"""
 
     @staticmethod
@@ -9,12 +9,11 @@ class Calendar:
         """ Paths in s3 bucket between two dates"""
 
         paths = []
-        for date in Calendar.dates(startDate, endDate):
+        for date in MonthlyClock.dates(startDate, endDate):
             paths.append('s3a://%s/%s' % (bucket, date))
         return paths
 
 
-    @staticmethod
     def dates(startDate, endDate):
         """ Iterates through all months between two dates"""
         date = startDate
