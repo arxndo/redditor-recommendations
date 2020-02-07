@@ -36,16 +36,8 @@ class DailyClock:
     @staticmethod
     def monthDates(date):
         """ Iterates through all dates within a given month"""
-        date = date + '-01'
+        return DailyClock().dates(date, date)
 
-        endDate = datetime.strptime(date, '%Y-%m-%d') + monthdelta(1)
-
-        while (datetime.strptime(date, "%Y-%m-%d") < endDate) :
-            yield date
-
-            date = (datetime.strptime(date, "%Y-%m-%d") \
-                    + timedelta(1)) \
-                     .strftime('%Y-%m-%d')
 
     def dates(self, startDate, endDate):
         """ Iterates through all months between two dates"""
@@ -57,7 +49,4 @@ class DailyClock:
 
         while (datetime.strptime(date, '%Y-%m-%d') <= endDateStamp) :
             yield date
-
-            date = (datetime.strptime(date, "%Y-%m-%d") \
-                    + timedelta(1)) \
-                     .strftime('%Y-%m-%d')
+            date = DailyClock.nextDate(date)

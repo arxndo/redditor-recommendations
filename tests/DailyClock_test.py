@@ -1,7 +1,7 @@
 from DailyClock import DailyClock
 import unittest
 
-class TestDailyClock(unittest.TestCase):
+class DailyClock_test(unittest.TestCase):
 
     def testDates(self):
         startDate = '2009-02'
@@ -23,7 +23,6 @@ class TestDailyClock(unittest.TestCase):
         for date, trueDate \
             in zip(DailyClock().dates(startDate, endDate), \
             trueDates):
-                print(date)
                 self.assertEqual(date, trueDate)
 
 if __name__ == '__main__':
