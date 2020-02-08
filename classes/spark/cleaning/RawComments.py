@@ -1,7 +1,8 @@
 import os
-from MonthlyBatches import MonthlyBatches
+from Batches import Batches
+from MonthlyClock import MonthlyClock
 
-class RawComments(MonthlyBatches):
+class RawComments(Batches):
 """ Raw JSON comment data """
 
     def __init__(self, cfg):
@@ -11,7 +12,7 @@ class RawComments(MonthlyBatches):
         self.commentsUrl = cfg['reddit']['commentsUrl']
         self.commentsPath = cfg['reddit']['commentsPath']
         self.outBucket = cfg['s3']['rawCommentsBucket']
-
+        self.clock = MonthlyClock
 
     def ingest(self, date):
         """ Download data from url.

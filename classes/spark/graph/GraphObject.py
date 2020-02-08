@@ -8,13 +8,11 @@ class GraphObject(Batches):
                     .read \
                     .parquet('s3a://%s/%s' \
                         % (self.inBucket, date))
-        self.df.show()
         return self
 
     def write(self, date):
-        self.df.show()
-        #self.df \
-        #    .repartition(self.partitions) \
-        #    .write \
-        #    .parquet('s3a://%s/%s' \
-        #        % (self.outBucket, date), mode='overwrite')
+        self.df \
+            .repartition(self.partitions) \
+            .write \
+            .parquet('s3a://%s/%s' \
+                % (self.outBucket, date), mode='overwrite')

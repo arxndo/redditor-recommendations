@@ -4,10 +4,10 @@ from MonthlyClock import MonthlyClock
 class CleanComments(Batches):
 
     def __init__(self, cfg, context):
-        super().__init__(MonthlyClock())
         self.context = context
         self.inBucket = cfg['s3']['rawCommentsBucket']
         self.outBucket = cfg['s3']['cleanCommentsBucket']
+        self.clock = MonthlyClock()
 
     def ingest(self, date):
         self.df = self.context.read.json('s3a://%s/RC_%s' \

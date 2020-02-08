@@ -5,10 +5,10 @@ from DailyClock import DailyClock
 class DailyComments(Batches):
 
     def __init__(self, cfg, context):
-        super().__init__(MonthlyClock())
         self.context = context
         self.inBucket = cfg['s3']['cleanCommentsBucket']
         self.outBucket = cfg['s3']['dailyCommentsBucket']
+        self.clock = MonthlyClock()
 
     def ingest(self, date):
         self.df = self.context.read.parquet('s3a://%s/%s' \
@@ -17,8 +17,9 @@ class DailyComments(Batches):
 
     def transform(self, date):
         
-        for day in DailyClock.monthDates(date): 
-            nextDayUTC = Diary.toUTC(Diary.nextDate(day))
+        dailyClock = DailyClock()
+        for day in dailyClock.monthDates(date): 
+            nextDayUTC = dailyClock.toUTC(dailyClock.nextDate(day))
 
             self.df \
                 .where('created_utc < %d' % nextDayUTC) \
