@@ -1,7 +1,10 @@
 s3:
     rawCommentsBucket: romeosredditcomments
     cleanCommentsBucket: clean-comments
-    #cleanCommentsBucket: redditcleancomments
+    authorsBucket: redditnodes
+    subredditsBucket: reddit-subs
+    relationshipsBucket: reddit-relationships
+
     dailyCommentsBucket: redditdailycomments
     edgesBucket: redditedges5
     dailyEdgesBucket: redditdailyedges
@@ -9,6 +12,7 @@ s3:
     nodesBucket: redditnodes
     mergedNodesBucket: redditmergednodes
     analysisBucket: redditanalysis
+
     testBucket: romeostestbucket
 reddit:
     commentsUrl: https://files.pushshift.io/reddit/comments
@@ -23,6 +27,6 @@ dates:
     startDate: 2005-12
     endDate: 2016-03
 tuning:
-    truncation: 1
+    truncation: 0
     edgePartitions: 1
-    nodePartitions: 1
+    nodePartitions: 48

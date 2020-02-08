@@ -1,13 +1,8 @@
 from pyspark.sql import functions as F
-from GraphObject import GraphObject
+from Edges import Edges
 
-class Edges(GraphObject):
+class AuthorAuthorEdges(Edges):
  
-    def __init__(self, cfg, context, inBucket, outBucket):
-        super().__init__(context, inBucket, outBucket)
-        self.truncation = cfg['tuning']['truncation']
-        self.partitions = cfg['tuning']['edgePartitions']
-
     def transform(self, date):
         self.df = self.df \
                       .groupBy('author') \
@@ -25,11 +20,3 @@ class Edges(GraphObject):
                 .where('weight > %d' % self.truncation)
 
         return self
-
-    def write(self, date):
-        n = self.partitions
-        self.df = self.df.repartition(n)
-        self.df \
-            .write \
-            .parquet('s3a://%s/%s' \
-                % (self.outBucket, date), mode='overwrite')

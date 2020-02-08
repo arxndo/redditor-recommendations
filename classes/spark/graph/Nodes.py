@@ -5,7 +5,7 @@ class Nodes(GraphObject):
  
     def transform(self, date):
         self.df = self.df \
-                .select(self.label, 'score') \
+                .select(self.label, self.valueName) \
                 .groupBy(self.label) \
-                .agg(F.sum('score').alias('score'))
+                .agg(F.sum(self.valueName).alias(self.valueName))
         return self

@@ -3,9 +3,6 @@ from MonthlyClock import MonthlyClock
 
 class GraphObject(Batches):
 
-    def __init__(self):
-        super().__init__(MonthlyClock())
-
     def ingest(self, date):
         self.df = self.context \
                     .read \
@@ -15,7 +12,7 @@ class GraphObject(Batches):
 
     def write(self, date):
         self.df \
-            .repartition(1) \
+            .repartition(self.partitions) \
             .write \
             .parquet('s3a://%s/%s' \
                 % (self.outBucket, date), mode='overwrite')
