@@ -26,6 +26,6 @@ dates:
     startDate: 2006-01
     endDate: 2006-02
 tuning:
-    truncation: 0
-    edgePartitions: 1
+    truncation: 1
+    edgePartitions: 48
     nodePartitions: 48
