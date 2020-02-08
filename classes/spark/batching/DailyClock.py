@@ -1,52 +1,30 @@
 from datetime import datetime, timedelta
 from monthdelta import monthdelta
 from calendar import monthrange
+from Clock import Clock
 
-class DailyClock:
-    """ Helper functions for iterating over multiple dates"""
+class DailyClock(Clock):
+    ''' Clock for iterating through daily batched data'''
 
-    @staticmethod
-    def s3paths(bucket, startDate, endDate):
-        """ Paths in s3 bucket between two dates"""
+    def __init__(self):
+        super().__init__
+        self.dateFormat = '%Y-%m-%d'
 
-        paths = []
-        for date in DailyClock.dates(startDate, endDate):
-            paths.append('s3a://%s/%s' % (bucket, date))
-        return paths
-
-    @staticmethod
-    def startOfMonth(date):
+    def startOfMonth(self, date):
         return date + '-01'
 
-    @staticmethod
-    def endOfMonth(date):
+    def endOfMonth(self, date):
         date = datetime.strptime(date, '%Y-%m')
         (_, lastDay) = monthrange(date.year, date.month)
         return '%d-%.2d-%.2d' % (date.year, date.month, lastDay)
 
-    @staticmethod
     def toUTC(date):
-        return int(datetime.strptime(date, '%Y-%m-%d').timestamp())
+        return int(datetime.strptime(date, self.dateFormat).timestamp())
 
-    @staticmethod
-    def nextDate(date):
-        return (datetime.strptime(date, '%Y-%m-%d')+ timedelta(1)) \
-                        .strftime('%Y-%m-%d') 
+    def nextDate(self, date):
+        return (datetime.strptime(date, self.dateFormat)+ timedelta(1)) \
+                        .strftime(self.dateFormat) 
 
-    @staticmethod
-    def monthDates(date):
+    def monthDates(self, date):
         """ Iterates through all dates within a given month"""
-        return DailyClock().dates(date, date)
-
-
-    def dates(self, startDate, endDate):
-        """ Iterates through all months between two dates"""
-        date = DailyClock.startOfMonth(startDate)
-
-        endDate = DailyClock.endOfMonth(endDate)
-
-        endDateStamp = datetime.strptime(endDate, '%Y-%m-%d')
-
-        while (datetime.strptime(date, '%Y-%m-%d') <= endDateStamp) :
-            yield date
-            date = DailyClock.nextDate(date)
+        return self.dates(date, date)

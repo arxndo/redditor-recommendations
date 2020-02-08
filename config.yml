@@ -1,6 +1,7 @@
 s3:
     rawCommentsBucket: romeosredditcomments
-    cleanCommentsBucket: redditcleancomments
+    cleanCommentsBucket: clean-comments
+    #cleanCommentsBucket: redditcleancomments
     dailyCommentsBucket: redditdailycomments
     edgesBucket: redditedges5
     dailyEdgesBucket: redditdailyedges

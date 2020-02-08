@@ -1,8 +1,7 @@
 import os
-from Sequentiable import Sequentiable
+from MonthlyBatches import MonthlyBatches
 
-
-class RawComments(Sequentiable):
+class RawComments(MonthlyBatches):
 """ Raw JSON comment data """
 
     def __init__(self, cfg):

@@ -1,9 +1,10 @@
-from Sequentiable import Sequentiable
+from Batches import Batches
+from MonthlyClock import MonthlyClock
 
-class CleanComments(Sequentiable):
+class CleanComments(Batches):
 
     def __init__(self, cfg, context):
-
+        super().__init__(MonthlyClock())
         self.context = context
         self.inBucket = cfg['s3']['rawCommentsBucket']
         self.outBucket = cfg['s3']['cleanCommentsBucket']
@@ -15,7 +16,12 @@ class CleanComments(Sequentiable):
 
     def transform(self, date):
         self.df = self.df \
-                      .select('author', 'link_id', 'score', 'created_utc') \
+                      .select('author', \
+                              'link_id', \
+                              'score', \
+                              'created_utc', \
+                              'subreddit', \
+                              'ups') \
                       .where('author != "[deleted]"')
         return self
 

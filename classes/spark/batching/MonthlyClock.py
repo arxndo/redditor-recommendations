@@ -1,17 +1,23 @@
 from datetime import datetime
 from monthdelta import monthdelta
+from Clock import Clock
 
-class MonthlyClock:
-    """ Helper functions for iterating over multiple dates"""
+class MonthlyClock(Clock):
+    ''' Clock for iterating through monthly batched data'''
 
-    @staticmethod
-    def s3paths(bucket, startDate, endDate):
-        """ Paths in s3 bucket between two dates"""
+    def __init__(self):
+        super().__init__
+        self.dateFormat = '%Y-%m'
 
-        paths = []
-        for date in MonthlyClock.dates(startDate, endDate):
-            paths.append('s3a://%s/%s' % (bucket, date))
-        return paths
+    def startOfMonth(self, date):
+        return date
+
+    def endOfMonth(self, date):
+        return date
+
+    def nextdate(self, date):
+        return (datetime.strptime(date, self.dateFormat)+ monthdelta(1)) \
+                        .strftime(self.dateFormat) 
 
 
     def dates(self, startDate, endDate):
