@@ -1,7 +1,7 @@
 from pyspark.sql import functions as F
-from Edges import Edges
+from GraphObject import GraphObject
 
-class AuthorAuthorEdges(Edges):
+class AuthorAuthorEdges(GraphObject):
  
     def transform(self, date):
         self.df = self.df \
@@ -18,5 +18,4 @@ class AuthorAuthorEdges(Edges):
                                              'df2.link_ids')) \
                         .alias('weight')) \
                 .where('weight > %d' % self.truncation)
-
         return self
