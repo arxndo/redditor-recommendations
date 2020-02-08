@@ -5,8 +5,8 @@ class MonthlyAuthorAuthorEdges(AuthorAuthorEdges):
  
     def __init__(self, cfg, context):
         self.context = context
-        self.inBucket = cfg['s3']['cleanCommentsBucket']
-        self.outBucket = cfg['s3']['dailyEdgesBucket']
+        self.inBucket = cfg['s3']['cleanComments']
+        self.outBucket = cfg['s3']['dailyEdges']
         self.truncation = cfg['tuning']['truncation']
         self.partitions = cfg['tuning']['edgePartitions']
         self.clock = MonthlyClock()

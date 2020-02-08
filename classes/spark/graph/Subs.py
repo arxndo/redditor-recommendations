@@ -5,8 +5,8 @@ class Subs(Nodes):
  
     def __init__(self, cfg, context):
         self.context = context
-        self.inBucket = cfg['s3']['cleanCommentsBucket']
-        self.outBucket = cfg['s3']['subredditsBucket']
+        self.inBucket = cfg['s3']['cleanComments']
+        self.outBucket = cfg['s3']['subreddits']
         self.label = 'subreddit'
         self.valueName = 'score'
         self.partitions = cfg['tuning']['nodePartitions']

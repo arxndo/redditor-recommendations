@@ -1,18 +1,18 @@
 s3:
-    rawCommentsBucket: romeosredditcomments
-    cleanCommentsBucket: clean-comments
-    authorsBucket: redditnodes
-    subredditsBucket: reddit-subs
-    relationshipsBucket: reddit-relationships
+    rawComments: romeosredditcomments
+    cleanComments: clean-comments
+    authors: redditnodes
+    subreddits: reddit-subs
+    relationships: reddit-relationships
 
-    dailyCommentsBucket: redditdailycomments
-    dailyEdgesBucket: redditdailyedges
-    edgesBucket: redditedges5
-    mergedEdgesBucket: redditmergededges
-    nodesBucket: redditnodes
-    mergedNodesBucket: redditmergednodes
+    dailyComments: redditdailycomments
+    dailyEdges: redditdailyedges
 
-    testBucket: romeostestbucket
+    mergedEdges: redditmergededges
+    nodes: redditnodes
+    mergedNodes: redditmergednodes
+
+    test: romeostestbucket
 reddit:
     commentsUrl: https://files.pushshift.io/reddit/comments
     commentsPath: files.pushshift.io/reddit/comments
@@ -23,9 +23,9 @@ neo4j:
 flask:
     address: none
 dates:
-    startDate: 2006-01
-    endDate: 2006-02
+    startDate: 2006-06
+    endDate: 2016-03
 tuning:
     truncation: 1
-    edgePartitions: 48
+    edgePartitions: 1
     nodePartitions: 48

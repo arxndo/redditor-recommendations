@@ -6,8 +6,8 @@ class DailyComments(Batches):
 
     def __init__(self, cfg, context):
         self.context = context
-        self.inBucket = cfg['s3']['cleanCommentsBucket']
-        self.outBucket = cfg['s3']['dailyCommentsBucket']
+        self.inBucket = cfg['s3']['cleanComments']
+        self.outBucket = cfg['s3']['dailyComments']
         self.clock = MonthlyClock()
 
     def ingest(self, date):

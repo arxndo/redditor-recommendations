@@ -7,8 +7,8 @@ class AuthorSubEdges(GraphObject):
 
     def __init__(self, cfg, context):
         self.context = context
-        self.inBucket = cfg['s3']['cleanCommentsBucket']
-        self.outBucket = cfg['s3']['relationshipsBucket']
+        self.inBucket = cfg['s3']['cleanComments']
+        self.outBucket = cfg['s3']['relationships']
         self.truncation = cfg['tuning']['truncation']
         self.partitions = cfg['tuning']['edgePartitions']
         self.clock = MonthlyClock()

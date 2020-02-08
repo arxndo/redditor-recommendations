@@ -11,7 +11,7 @@ class RawComments(Batches):
     """
         self.commentsUrl = cfg['reddit']['commentsUrl']
         self.commentsPath = cfg['reddit']['commentsPath']
-        self.outBucket = cfg['s3']['rawCommentsBucket']
+        self.outBucket = cfg['s3']['rawComments']
         self.clock = MonthlyClock
 
     def ingest(self, date):
