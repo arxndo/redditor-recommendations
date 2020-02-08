@@ -1,9 +1,10 @@
-class GraphObject:
+from Batches import Batches
+from MonthlyClock import MonthlyClock
 
-    def __init__(self, context, inBucket, outBucket):
-        self.context = context
-        self.inBucket = inBucket
-        self.outBucket = outBucket
+class GraphObject(Batches):
+
+    def __init__(self):
+        super().__init__(MonthlyClock())
 
     def ingest(self, date):
         self.df = self.context \

@@ -1,10 +1,11 @@
-from Sequentiable import Sequentiable
-from Diary import Diary
+from Batches import Batches
+from MonthlyClock import MonthlyClock
+from DailyClock import DailyClock
 
-class DailyComments(Sequentiable):
+class DailyComments(Batches):
 
     def __init__(self, cfg, context):
-
+        super().__init__(MonthlyClock())
         self.context = context
         self.inBucket = cfg['s3']['cleanCommentsBucket']
         self.outBucket = cfg['s3']['dailyCommentsBucket']
@@ -16,7 +17,7 @@ class DailyComments(Sequentiable):
 
     def transform(self, date):
         
-        for day in Diary.monthDates(date): 
+        for day in DailyClock.monthDates(date): 
             nextDayUTC = Diary.toUTC(Diary.nextDate(day))
 
             self.df \
