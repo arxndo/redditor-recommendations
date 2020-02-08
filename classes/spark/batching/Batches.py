@@ -1,7 +1,6 @@
 class Batches:
 
     def __init__(self, clock):
-        print('hello')
         self.clock = clock
 
     def process(self, startDate, endDate):

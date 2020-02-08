@@ -20,7 +20,7 @@ neo4j:
 flask:
     address: none
 dates:
-    startDate: 2006-01
+    startDate: 2005-12
     endDate: 2016-03
 tuning:
     truncation: 1
