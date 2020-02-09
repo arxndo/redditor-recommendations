@@ -13,8 +13,8 @@ class Importer:
     def process(self, startDate, endDate):
         self.startDate = startDate
         self.endDate = endDate
-        self.downloadAll() \
-            .toDatabase()
+        #self.downloadAll() \
+        self.toDatabase()
         #self.cleanUp()
 
     def downloadAll(self):
