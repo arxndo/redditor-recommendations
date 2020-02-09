@@ -1,14 +1,13 @@
-from pyspark.sql import functions as F
 from MergedNodes import MergedNodes
 from MonthlyClock import MonthlyClock
 
-class MergedAuthors(MergedNodes):
+class MergedSubs(MergedNodes):
  
     def __init__(self, cfg, context):
         self.context = context
-        self.inBucket = cfg['s3']['authors']
+        self.inBucket = cfg['s3']['subreddits']
         self.outBucket = cfg['s3']['merged']
         self.clock = MonthlyClock()
-        self.label = 'author'
+        self.label = 'subreddit'
         self.valueName = 'score'
-        self.name = 'authors'
+        self.name = 'subs'

@@ -4,27 +4,28 @@ s3:
     authors: redditnodes
     subreddits: reddit-subs
     relationships: reddit-relationships
+    merged: reddit-merged
 
     dailyComments: redditdailycomments
     dailyEdges: redditdailyedges
 
-    mergedEdges: redditmergededges
-    nodes: redditnodes
-    mergedNodes: redditmergednodes
-
-    test: romeostestbucket
 reddit:
     commentsUrl: https://files.pushshift.io/reddit/comments
     commentsPath: files.pushshift.io/reddit/comments
+
 spark:
     master: spark://10.0.0.12:7077
+
 neo4j:
     address: none
+
 flask:
     address: none
+
 dates:
-    startDate: 2006-06
+    startDate: 2005-12
     endDate: 2016-03
+
 tuning:
     truncation: 1
     edgePartitions: 1
