@@ -15,7 +15,7 @@ class Importer:
         self.endDate = endDate
         self.downloadAll()
         self.toDatabase()
-        #self.cleanUp()
+        self.cleanUp()
 
     def downloadAll(self):
         #if not os.path.isdir('%s/tmp' % self.path):
@@ -33,7 +33,7 @@ class Importer:
         #os.system('rm -rf tmp')
 
     def cleanUp(self):
-        pass
+        os.sytem('rm -rf tmp')
 
     def toDatabase(self):
         os.system('sudo /usr/bin/neo4j stop')
