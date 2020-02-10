@@ -6,3 +6,4 @@ echo 'export PYTHONPATH=$PYTHONPATH:~/redditor-recommendations/classes/spark/mer
 echo 'export PYTHONPATH=$PYTHONPATH:~/redditor-recommendations/classes/spark/cleaning' >> ~/.bashrc
 echo 'export PYTHONPATH=$PYTHONPATH:~/redditor-recommendations/scripts' >> ~/.bashrc
 echo 'export PYTHONPATH=$PYTHONPATH:~/redditor-recommendations/classes/neo4j' >> ~/.bashrc
+echo 'export PYTHONPATH=$PYTHONPATH:~/redditor-recommendations/classes/spark/pruning' >> ~/.bashrc

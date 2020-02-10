@@ -13,12 +13,13 @@ class Importer:
     def process(self, startDate, endDate):
         self.startDate = startDate
         self.endDate = endDate
-        #self.downloadAll() \
+        self.downloadAll()
         self.toDatabase()
         #self.cleanUp()
 
     def downloadAll(self):
-        if not os.path.isdir('%s/tmp' % self.path):
+        #if not os.path.isdir('%s/tmp' % self.path):
+        if not os.path.isdir('tmp'):
             for name in [self.nodes1, self.nodes2, self.edges]:
                 self.download(name)
         return self
