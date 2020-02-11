@@ -17,7 +17,9 @@ spark:
     master: spark://10.0.0.12:7077
 
 neo4j:
-    address: none
+        address: bolt://127.0.0.1:7687
+        username: neo4j
+        password: insight
 
 flask:
     address: none
