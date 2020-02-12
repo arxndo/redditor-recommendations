@@ -25,7 +25,7 @@ for item in result:
 
 
 
-name1 = 'arxndo'
+name1 = 'kn0thing'
 name2 = 'GovSchwarzenegger'
 result = nr.cosineSimilarity(name1, name2)
-print('\n%s,%s: %f' % (name1, name2, result))
+print('\n%s,%s: %.2f' % (name1, name2, result))

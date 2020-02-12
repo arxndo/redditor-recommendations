@@ -49,4 +49,4 @@ class NeoReddit:
             tx = session.begin_transaction()
             result = tx.run("MATCH (p1:author {name: {name1}})-[likes1:post_to]->(cuisine) MATCH (p2:author {name: {name2}})-[likes2:post_to]->(cuisine) RETURN p1.name AS from, p2.name AS to, algo.similarity.cosine(collect(likes1.score), collect(likes2.score)) AS similarity", name1=name1,name2=name2)
         for item in result.records():
-            return item['similarity']
+            return round(item['similarity'] , 2)
