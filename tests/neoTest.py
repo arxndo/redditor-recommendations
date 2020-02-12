@@ -13,3 +13,5 @@ print('')
 result = nr.subToAuthors('batman', 3)
 for item in result.records():
     print(item['author'])
+
+
