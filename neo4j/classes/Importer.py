@@ -37,6 +37,6 @@ class Importer:
 
     def toDatabase(self):
         os.system('sudo /usr/bin/neo4j stop')
-        os.system('sudo /usr/bin/neo4j-admin import --nodes:author="headers/authors_header.csv,tmp/authors.csv" --nodes:subreddit="headers/subs_header.csv,tmp/subs.csv" --relationships:post_to="headers/author-sub_header.csv,tmp/author-sub.csv" --ignore-duplicate-nodes true --ignore-missing-nodes true')
+        os.system('sudo /usr/bin/neo4j-admin import --nodes:author="neo4j/classes/headers/authors_header.csv,tmp/authors.csv" --nodes:subreddit="neo4j/classes/headers/subs_header.csv,tmp/subs.csv" --relationships:post_to="neo4j/classes/headers/author-sub_header.csv,tmp/author-sub.csv" --ignore-duplicate-nodes true --ignore-missing-nodes true')
         os.system('sudo /usr/bin/neo4j start')
         return self
