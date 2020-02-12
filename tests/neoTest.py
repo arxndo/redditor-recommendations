@@ -4,7 +4,7 @@ from NeoReddit import NeoReddit
 cfg = Configuration.configuration('config.yml')
 nr = NeoReddit(cfg)
 
-authorName = 'arxndo'
+authorName = 'kn0thing'
 print('\nSubs subscribed to by: %s' % authorName)
 result = nr.authorToSubs(authorName, 3)
 for item in result:
@@ -12,14 +12,14 @@ for item in result:
 
 subName = 'Patriots'
 print('\nRedditors subscribed to: %s' % subName)
-result = nr.subToAuthors(subName, 10)
+result = nr.subToAuthors(subName, 3)
 for item in result:
     name = item[0]
     score = item[1]
     print('\n%s\nscore: %d' %(name, score))
     similarity = nr.cosineSimilarity(authorName, name)
     print('similarity: %f' % similarity)
-    subList = nr.authorToSubs(name,10)
+    subList = nr.authorToSubs(name,3)
     for subItem in subList:
         print(subItem[0])
 
