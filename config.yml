@@ -1,25 +1,28 @@
 s3:
-    rawComments:
-    cleanComments:
-    authors:
-    subreddits:
-    relationships:
-    merged: 
+    rawComments: romeosredditcomments
+    cleanComments: clean-comments
+    authors: redditnodes
+    subreddits: reddit-subs
+    relationships: reddit-relationships
+    merged: reddit-merged
+
+    dailyComments: redditdailycomments
+    dailyEdges: redditdailyedges
 
 reddit:
     commentsUrl: https://files.pushshift.io/reddit/comments
     commentsPath: files.pushshift.io/reddit/comments
 
 spark:
-    master:
+    master: spark://10.0.0.12:7077
 
 neo4j:
-        address: 
-        username:
-        password:
+        address: bolt://127.0.0.1:7687
+        username: neo4j
+        password: insight
 
 flask:
-    address:
+    address: none
 
 dates:
     startDate: 2005-12

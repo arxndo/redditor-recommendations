@@ -5,13 +5,15 @@ import unittest
 class NeoReddit_test(unittest.TestCase):
 
     def setUp(self):
-        cfg = Configuration.configuration('config.yml')
+        cfg = Configuration.configuration('/home/ubuntu/redditor-recommendations/config.yml')
         self.nr = NeoReddit(cfg)
+
 
     def compareLists(self, expectedList, actualList):
         for actual, expected in zip(actualList, expectedList):
             self.assertEqual(actual[0], expected[0])
             self.assertEqual(actual[1], expected[1])
+
 
     def test_authorToSubs(self):
         authorName = 'kn0thing'
@@ -23,6 +25,7 @@ class NeoReddit_test(unittest.TestCase):
 
         self.compareLists(expectedList, actualList)
 
+
     def test_subToAuthors(self):
         subName = 'Patriots'
         expectedList = [('swantonsoup', 36244), \
@@ -32,13 +35,13 @@ class NeoReddit_test(unittest.TestCase):
         actualList = self.nr.subToAuthors(subName, 3)
         self.compareLists(expectedList, actualList)
 
+
     def test_cosineSimilarity(self):
         author1 = 'kn0thing'
         author2 = 'GovSchwarzenegger'
         expected = 0.97
         actual = self.nr.cosineSimilarity(author1, author2)
         self.assertEqual(expected, actual)
-
 
 
 if __name__ == '__main__':

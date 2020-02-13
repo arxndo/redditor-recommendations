@@ -1,0 +1,13 @@
+{% extends "layout_home.html" %}
+{% block content %}
+   <div class="home">
+     <h1>Redditor Recommendations</h1>
+     	{% from "_formhelpers.html" import render_field %}
+	<form method="post">
+              <input type="text" class="searchTerm" placeholder="Username">
+              <button type="submit" class="searchButton">
+                <i class="fa fa-search"></i>
+             </button>
+	</form>
+   </div>
+{% endblock %}

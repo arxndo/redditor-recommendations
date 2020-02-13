@@ -3,8 +3,8 @@ small_tests
 data
 import*
 tmp
-*yml
 config.yml
+*yml
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
