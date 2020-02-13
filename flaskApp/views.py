@@ -16,7 +16,6 @@ def about():
 @app.route('/')
 @app.route('/home', methods=['GET', 'POST'])
 def home():
-    #search = RedditorSearchForm(request.form)
     if request.method == 'POST':
         name = request.form['text']
         return search_results(name)
@@ -31,6 +30,9 @@ def search_results(name):
     nr = NeoReddit(cfg)
 
     authors = nr.authorToAuthors(name, 3)
+
+    if not authors:
+        return render_template('error.html' )
 
     item1 = nr.authorToSubs(authors[0], 3)
     subName1 = []
@@ -48,10 +50,7 @@ def search_results(name):
     for sub in item3:
         subName3.append(sub[0])
 
-    if not authors:
-        return render_template('error.html' )
-    else:
-        return render_template('results.html', name1=authors[0], \
+    return render_template('results.html', name1=authors[0], \
                                                 name2=authors[1], \
                                                 name3=authors[2], \
                                                 sub11=subName1[0], \
