@@ -4,28 +4,36 @@ from NeoReddit import NeoReddit
 cfg = Configuration.configuration('config.yml')
 nr = NeoReddit(cfg)
 
-authorName = 'kn0thing'
-print('\nSubs subscribed to by: %s' % authorName)
-result = nr.authorToSubs(authorName, 3)
-for item in result:
-    print('sub: %s, score: %d' %(item[0], item[1]))
 
-subName = 'Patriots'
-print('\nRedditors subscribed to: %s' % subName)
-result = nr.subToAuthors(subName, 3)
-for item in result:
-    name = item[0]
-    score = item[1]
-    print('\n%s\nscore: %d' %(name, score))
-    similarity = nr.cosineSimilarity(authorName, name)
-    print('similarity: %f' % similarity)
-    subList = nr.authorToSubs(name,3)
-    for subItem in subList:
-        print(subItem[0])
+authorName = 'arxndo'
+
+authors = nr.authorToAuthors(authorName, 3)
+for item in authors:
+    print(item)
+
+    
+item1 = nr.authorToSubs(authors[0], 3)
+subName1 = []
+for sub in item1:
+    subName1.append(sub[0])
+
+item2 = nr.authorToSubs(authors[1], 3)
+subName2 = []
+for sub in item2:
+    subName2.append(sub[0])
+
+item3 = nr.authorToSubs(authors[2], 3)
+subName3 = []
+for sub in item3:
+    subName3.append(sub[0])
 
 
-
-name1 = 'kn0thing'
-name2 = 'GovSchwarzenegger'
-result = nr.cosineSimilarity(name1, name2)
-print('\n%s,%s: %.2f' % (name1, name2, result))
+print(subName1[0])
+print(subName1[1])
+print(subName1[2])
+print(subName2[0])
+print(subName2[1])
+print(subName2[2])
+print(subName3[0])
+print(subName3[1])
+print(subName3[2])

@@ -9,6 +9,18 @@ class NeoReddit:
                             (cfg['neo4j']['username'], \
                              cfg['neo4j']['password']))
 
+    def authorToAuthors(self, name, n):
+        subs = self.authorToSubs(name, n)
+        authors = []
+        for sub in subs:
+            subName = sub[0]
+            author = self.subToAuthors(subName, 1)
+            authorName = author[0]
+            authors.append(authorName)
+        if len(authors) == 1:
+            return authors[0]
+        else:
+            return authors
 
     def topSub(self, name):
         with self.driver.session() as session:
@@ -31,7 +43,10 @@ class NeoReddit:
         subList = []
         for item in result.records():
             subList.append((item['subreddit'], item['score']))
-        return subList
+        if len(subList) == 1:
+            return subList[0]
+        else:
+            return subList
 
 
     def subToAuthors(self, name, n):
@@ -41,7 +56,10 @@ class NeoReddit:
         authorList = []
         for item in result.records():
             authorList.append((item['author'], item['score']))
-        return authorList
+        if len(authorList) == 1:
+            return authorList[0]
+        else:
+            return authorList
 
 
     def cosineSimilarity(self, name1, name2):

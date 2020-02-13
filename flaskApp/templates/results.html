@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block content %}
+   <div class="results">
+	<form method="post">
+              <input type="text" class="searchTerm" placeholder="Username">
+              <button type="submit" class="searchButton">
+                <i class="fa fa-search"></i>
+             </button>
+	</form>
+	<div>
+		&nbsp;
+	</div>
+	<div>
+		&nbsp;
+	</div>
+	<div>
+		{{name1}}: {{sub11}}, {{sub12}}, {{sub13}}
+	</div>
+	<div>
+		&nbsp;
+	</div>
+	<div>
+		{{name2}}: {{sub21}}, {{sub22}}, {{sub23}}
+	</div>
+	<div>
+		&nbsp;
+	</div>
+	<div>
+		{{name3}}: {{sub31}}, {{sub32}}, {{sub33}}
+	</div>
+   </div>
+{% endblock %}
