@@ -1,5 +1,9 @@
 echo ''  >> ~/.bashrc
-echo 'export PYTHONPATH=$PYTHONPATH:~/redditor-recommendations/src/classes/concrete' >> ~/.bashrc
-echo 'export PYTHONPATH=$PYTHONPATH:~/redditor-recommendations/src/classes/abstract' >> ~/.bashrc
-echo 'export PYTHONPATH=$PYTHONPATH:~/redditor-recommendations/src/classes/helpers' >> ~/.bashrc
-echo 'export PYTHONPATH=$PYTHONPATH:~/redditor-recommendations/src/scripts' >> ~/.bashrc
+echo 'export PYTHONPATH=$PYTHONPATH:~/redditor-recommendations/classes/spark/batching' >> ~/.bashrc
+echo 'export PYTHONPATH=$PYTHONPATH:~/redditor-recommendations/classes/spark/graph' >> ~/.bashrc
+echo 'export PYTHONPATH=$PYTHONPATH:~/redditor-recommendations/classes/spark/infrastructure' >> ~/.bashrc
+echo 'export PYTHONPATH=$PYTHONPATH:~/redditor-recommendations/classes/spark/merge' >> ~/.bashrc
+echo 'export PYTHONPATH=$PYTHONPATH:~/redditor-recommendations/classes/spark/cleaning' >> ~/.bashrc
+echo 'export PYTHONPATH=$PYTHONPATH:~/redditor-recommendations/scripts' >> ~/.bashrc
+echo 'export PYTHONPATH=$PYTHONPATH:~/redditor-recommendations/classes/neo4j' >> ~/.bashrc
+echo 'export PYTHONPATH=$PYTHONPATH:~/redditor-recommendations/classes/spark/pruning' >> ~/.bashrc
