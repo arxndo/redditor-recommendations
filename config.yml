@@ -1,5 +1,6 @@
 s3:
-    rawComments: romeosredditcomments
+    rawComments: romeostestbucket
+        #rawComments: romeosredditcomments
     cleanComments: clean-comments
     authors: redditnodes
     subreddits: reddit-subs
@@ -25,8 +26,8 @@ flask:
     address: none
 
 dates:
-    startDate: 2005-12
-    endDate: 2016-03
+    startDate: 2006-04
+    endDate: 2017-11
 
 tuning:
     truncation: 1

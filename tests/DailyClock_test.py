@@ -1,4 +1,4 @@
-from DailyClock import DailyClock
+from utils.classes.DailyClock import DailyClock
 import unittest
 
 class DailyClock_test(unittest.TestCase):
