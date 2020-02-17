@@ -1,32 +1,65 @@
 {% extends "layout.html" %}
 {% block content %}
    <div class="results">
-<!--	<form method="post">
+	<form method="post">
               <input type="text" class="searchTerm" placeholder="Username">
               <button type="submit" class="searchButton">
                 <i class="fa fa-search"></i>
 	      </button> 
-</form> -->
+	</form>
+
 	<div>
 		&nbsp;
 	</div>
 	<div>
-		&nbsp;
+		<font size="6"> {{name}} </font>
 	</div>
-	<div>
-		{{name1}}: {{sub11}}, {{sub12}}, {{sub13}}
 	</div>
-	<div>
-		&nbsp;
+
+	<style type="text/css"> 
+	      
+	    th:tr{ 
+	        color: blue; 
+	  
+	    } 
+	    tr:nth-of-type(2n){ 
+	        border: 1px solid black; 
+	        background-color: rgba(150, 150, 150, 0.5); 
+	  
+	    } 
+	  
+	    td{ 
+	        padding: 8px 8px; 
+	        border: 1px solid black; 
+	    } 
+	</style>
+
+	<table align="center" style="margin-center: 20px;"> 
+	<!-- Table headers -->
+	    <th> 
+	        <tr style="color: green; ">     
+	        <td>Your Top Subreddits</td> 
+	        <td>Top Redditors</td> 
+	        <td>Their Top Subreddits</td> 
+	</tr> 
+	    </th> 
+	      
+	<!-- For loop logic of jinja template -->
+	{%for i in range(0, len)%} 
+	  
+	<!-- table rows -->
+	<tr> 
+	    <td>{{subs[i]}}</td> 
+	    <td style="font-weight: bold">{{authors[i]}}</td> 
+	    <td>{{otherSubs[i]}}</td> 
+	  
+	{%endfor%} 
+	  
+	</tr> 
+	  
+	</table> 
 	</div>
-	<div>
-		{{name2}}: {{sub21}}, {{sub22}}, {{sub23}}
-	</div>
-	<div>
-		&nbsp;
-	</div>
-	<div>
-		{{name3}}: {{sub31}}, {{sub32}}, {{sub33}}
-	</div>
+	
+
    </div>
 {% endblock %}
