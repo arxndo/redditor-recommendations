@@ -1,9 +1,7 @@
 # Redditor Recommendations
 
-Most social media sites recommend users that a given user may want to friend or follow. Although reddit does provide the feature of following specific redditors, it does not prominently display which redditors one may want to friend. We propose the following two recommendations systems:
+Most social media sites recommend users that a given person may want to friend or follow. For examples, on Facebook, Instagram, Twitter, and LinkedIn, the following are typically displayed somewhere on the frontpage:
 
-* Recommend redditors with the highest karma posts in the given redditor's favorite subreddits.
+![Alt text](friend-recommendations.png)
 
-* Recommend redditors with the highest karma amongst the given redditor's community of users with whom he has had the most interaction (as measured by replies).
-
-The first system allows users to discover top commenters within their favorite subreddits. The second system, on the other hand, recommends users with whom a given redditor is more likely to engage with.
+On Reddit, however, one finds only recommendations for specific subreddits (i.e. communities organized by topic discussion) rather than for individual users, such as the following
