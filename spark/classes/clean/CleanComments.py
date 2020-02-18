@@ -1,5 +1,5 @@
-from Batches import Batches
-from MonthlyClock import MonthlyClock
+from spark.classes.Batches import Batches
+from utils.classes.MonthlyClock import MonthlyClock
 
 class CleanComments(Batches):
 

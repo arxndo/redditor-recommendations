@@ -1,6 +1,6 @@
-from Batches import Batches
-from MonthlyClock import MonthlyClock
-from DailyClock import DailyClock
+from spark.classes.Batches import Batches
+from utils.classes.MonthlyClock import MonthlyClock
+from utils.classes.DailyClock import DailyClock
 
 class DailyComments(Batches):
 

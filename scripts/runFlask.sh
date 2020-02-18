@@ -1,1 +1,1 @@
-python3 ~/redditor-recommendations/scripts/runFlask.py
+sudo python3 ~/redditor-recommendations/runFlask.py

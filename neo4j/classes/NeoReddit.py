@@ -9,44 +9,33 @@ class NeoReddit:
                             (cfg['neo4j']['username'], \
                              cfg['neo4j']['password']))
 
-    def authorToAuthors(self, name, n):
-        subs = self.authorToSubs(name, n)
-        authors = []
-        for sub in subs:
-            subName = sub[0]
-            author = self.subToAuthors(subName, 1)
-            authorName = author[0]
-            authors.append(authorName)
-        if len(authors) == 1:
-            return authors[0]
-        else:
-            return authors
-
-    def topSub(self, name):
+    def getKarma(self, name):
         with self.driver.session() as session:
             tx = session.begin_transaction()
-            topSub = ''
-            topScore = 0
-            for record in tx.run("MATCH (a:author{name: {name}})"
-                                "-[:post_to]->(s:subreddit) " \
-                                "RETURN s.name, s.score", \
-                                 name = name):
-                if (record['s.score'] > topScore):
-                    topScore = record['s.score']
-                    topSub = record['s.name']
-            return topSub
+            result = tx.run("match (a:author {name: {name}}) return a.score as score", name=name)  
+        for item in result.records():
+            karma = item['score']
+        return karma
+
+
+    def authorToAuthors(self, name, n):
+        subs = self.authorToSubs(name, n)
+        authorRecords = []
+        for sub in subs:
+            subName = sub[0]
+            authorList = self.subToAuthors(subName, 1)
+            authorRecords.append(authorList[0])
+        return authorRecords
+
 
     def authorToSubs(self, name, n):
         with self.driver.session() as session:
             tx = session.begin_transaction()
-            result = tx.run("match (:author {name: {name}})-[r:post_to]->(s:subreddit) with s.name as sname, r.score as rscore order by rscore desc with collect([sname,rscore])[..{n}] as topsubs unwind topsubs as q return q[0] as subreddit, q[1] as score", name=name, n=n)  
+            result = tx.run("match (a:author {name: {name}})-[r:post_to]->(s:subreddit) with s.name as sname, r.score as rscore order by rscore desc with collect([sname,rscore])[..{n}] as topsubs unwind topsubs as q return q[0] as subreddit, q[1] as score", name=name, n=n)  
         subList = []
         for item in result.records():
             subList.append((item['subreddit'], item['score']))
-        if len(subList) == 1:
-            return subList[0]
-        else:
-            return subList
+        return subList
 
 
     def subToAuthors(self, name, n):
@@ -56,10 +45,7 @@ class NeoReddit:
         authorList = []
         for item in result.records():
             authorList.append((item['author'], item['score']))
-        if len(authorList) == 1:
-            return authorList[0]
-        else:
-            return authorList
+        return authorList
 
 
     def cosineSimilarity(self, name1, name2):
