@@ -1,5 +1,5 @@
 from NeoReddit import NeoReddit
-from Configuration import Configuration
+from utils.classes.Configuration import Configuration
 import unittest
 
 class NeoReddit_test(unittest.TestCase):

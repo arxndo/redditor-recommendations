@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 from monthdelta import monthdelta
 from calendar import monthrange
-from Clock import Clock
+from utils.classes.Clock import Clock
 
 class DailyClock(Clock):
     ''' Clock for iterating through daily batched data'''
