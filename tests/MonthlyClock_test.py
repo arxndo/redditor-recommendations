@@ -1,4 +1,4 @@
-from MonthlyClock import MonthlyClock
+from utils.classes.MonthlyClock import MonthlyClock
 import unittest
 
 class DailyClock_test(unittest.TestCase):

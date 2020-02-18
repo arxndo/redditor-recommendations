@@ -1,6 +1,6 @@
 from datetime import datetime
 from monthdelta import monthdelta
-from Clock import Clock
+from utils.classes.Clock import Clock
 
 class MonthlyClock(Clock):
     ''' Clock for iterating through monthly batched data'''
