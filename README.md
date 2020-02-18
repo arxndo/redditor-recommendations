@@ -13,7 +13,7 @@ On Reddit, however, one finds only recommendations for specific subreddits (i.e.
 Reddit has two features that allows users to more easily find posts by specific users. The first is the "friend" feature, which allows users to have posts by all of those they have marked as friends collected in a single subreddit, r/friends. The second is the "follow" feature, which publishes posts by people that the user follows directly to the front page. Both features are sparingly used. The follow button is currently located on the profile pages of users, as in the following:
 
 
-![redditor-profile](images/redditor-profile.png | width=50)
+![redditor-profile](images/redditor-profile.png)
 
 
 There is an argument to be made that keeping the focus of Reddit on discussions, rather than individual posters, is what would be best for keeping the original spirit of the website. However, given that shifting the focus to individuals would attract celebrities, influencers, and advertisers, it is understable that Reddit would face strong financial pressure to promote its "follow" feature. Indeed, Reddit announced in the summer of 2019 that it will soon enact greater transparency protocols (in particular, allowing redditors to view who follows them), signaling a possible new direction for the site.
