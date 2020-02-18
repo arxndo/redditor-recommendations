@@ -1,12 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
    <div class="results">
-	<form method="post">
-              <input type="text" class="searchTerm" placeholder="Username">
-              <button type="submit" class="searchButton">
-                <i class="fa fa-search"></i>
-	      </button> 
-	</form>
 
 	<div>
 		&nbsp;
@@ -50,7 +44,9 @@
 	<!-- table rows -->
 	<tr> 
 	    <td>{{subs[i]}}</td> 
-	    <td style="font-weight: bold">{{authors[i]}}</td> 
+		<td style="font-weight: bold">
+			<a href="http://www.reddit.com/user/{{authors[i]}}">{{authors[i]}}</a>
+	    	</td> 
 	    <td>{{otherSubs[i]}}</td> 
 	  
 	{%endfor%} 
