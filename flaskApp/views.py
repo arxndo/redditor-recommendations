@@ -12,7 +12,7 @@ def about():
     return render_template('about.html')
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 @app.route('/home', methods=['GET', 'POST'])
 def home():
     if request.method == 'POST':
@@ -21,19 +21,19 @@ def home():
 
     return render_template('home.html')
 
-@app.route('/home', methods=['GET', 'POST'])
+@app.route('/results', methods=['GET', 'POST'])
 def search_results(name):
 
     cfg = Configuration.configuration('config.yml')
-    nr = NeoReddit(cfg)
+    neoReddit = NeoReddit(cfg)
 
-    authorRecords = nr.authorToAuthors(name, 5)
+    authorRecords = neoReddit.authorToAuthors(name, 5)
 
     if not authorRecords:
         return render_template('error.html' )
 
-    karma = nr.getKarma(name)
-    subList = nr.authorToSubs(name, 5)
+    karma = neoReddit.getKarma(name)
+    subList = neoReddit.authorToSubs(name, 5)
     selfSubs = []
     for record in subList:
         string = '%s %d%%' % (record[0], round(100*record[1]/karma))
@@ -44,9 +44,9 @@ def search_results(name):
     subInfo = []
     for record in authorRecords:
         authorName = record[0]
-        authorKarma = nr.getKarma(authorName)
+        authorKarma = neoReddit.getKarma(authorName)
         string = ''
-        authorSubs = nr.authorToSubs(authorName, 3)
+        authorSubs = neoReddit.authorToSubs(authorName, 3)
         for subRecord in authorSubs:
             string += '%s %d%%, ' % (subRecord[0], round(100*subRecord[1]/authorKarma))
         authors.append(authorName)

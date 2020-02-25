@@ -1,4 +1,5 @@
 from neo4j import GraphDatabase
+import functools
 
 class NeoReddit:
 
@@ -18,6 +19,7 @@ class NeoReddit:
         return karma
 
 
+    @functools.lru_cache(maxsize = None)
     def authorToAuthors(self, name, n):
         subs = self.authorToSubs(name, n)
         authorRecords = []
@@ -28,6 +30,7 @@ class NeoReddit:
         return authorRecords
 
 
+    @functools.lru_cache(maxsize = None)
     def authorToSubs(self, name, n):
         with self.driver.session() as session:
             tx = session.begin_transaction()
@@ -37,7 +40,7 @@ class NeoReddit:
             subList.append((item['subreddit'], item['score']))
         return subList
 
-
+    @functools.lru_cache(maxsize = None)
     def subToAuthors(self, name, n):
         with self.driver.session() as session:
             tx = session.begin_transaction()
