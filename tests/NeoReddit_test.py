@@ -35,6 +35,17 @@ class NeoReddit_test(unittest.TestCase):
         actualList = self.nr.subToAuthors(subName, 3)
         self.compareLists(expectedList, actualList)
 
+    def test_authorToAuthors(self):
+        authorName = 'williamshatner'
+        expectedList = [('PeterMayhew', 47773), \
+                        ('williamshatner', 6852), \
+                        ('redtaboo', 8826), \
+                        ('united1020', 46618), \
+                        ('wil', 31172)]
+
+        actualList = self.nr.authorToAuthors(authorName, 5)
+        self.compareLists(expectedList, actualList)
+
 
     def test_cosineSimilarity(self):
         author1 = 'kn0thing'
