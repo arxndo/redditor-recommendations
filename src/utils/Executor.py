@@ -3,6 +3,9 @@ from Configuration import Configuration
 from MyContext import MyContext
 
 class Executor:
+    """ A class whose sole method calls the 'process' method
+    of a class given the name of said class (provided it has one)"""
+
 
     @staticmethod
     def run(className):

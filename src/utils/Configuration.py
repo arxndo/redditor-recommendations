@@ -1,6 +1,9 @@
 import yaml
 
 class Configuration:
+    """ Configuration includes ip addresses, s3 bucket names
+    usernames, passwords, and other parameters
+    (see config_template.yml"""
     
     @staticmethod
     def configuration(configName):

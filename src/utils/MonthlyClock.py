@@ -3,7 +3,7 @@ from monthdelta import monthdelta
 from src.utils.Clock import Clock
 
 class MonthlyClock(Clock):
-    ''' Clock for iterating through monthly batched data'''
+    """ Clock for iterating through monthly batched data"""
 
     def __init__(self):
         super().__init__
