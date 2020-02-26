@@ -1,1 +1,1 @@
-sudo python3 ~/redditor-recommendations/src/frontend/runFlask.py
+sudo python3 ~/redditor-recommendations/src/frontend/flaskApp/app.py
