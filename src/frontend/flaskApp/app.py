@@ -5,7 +5,22 @@ sys.path.append('src/utils')
 from NeoReddit import NeoReddit 
 from Configuration import Configuration
 from flask import render_template, flash, request, redirect
-from flaskApp import app
+from flask_caching import Cache
+from flask import Flask
+
+
+config = {
+        "DEBUG": False,
+        "CACHE_TYPE": "simple",
+        "CACHE_DAFAULT_TIMEOUT": 300
+}
+
+app  = Flask(__name__)
+app.config.from_mapping(config)
+cache = Cache(app)
+
+cfg = Configuration.configuration('config.yml')
+neoReddit = NeoReddit(cfg)
 
 @app.route('/about')
 def about():
@@ -21,16 +36,13 @@ def home():
 
     return render_template('home.html')
 
-@app.route('/results', methods=['GET', 'POST'])
-def search_results(name):
 
-    cfg = Configuration.configuration('config.yml')
-    neoReddit = NeoReddit(cfg)
+def authorToAuthors(name):
 
     authorRecords = neoReddit.authorToAuthors(name, 5)
 
     if not authorRecords:
-        return render_template('error.html' )
+        return None
 
     karma = neoReddit.getKarma(name)
     subList = neoReddit.authorToSubs(name, 5)
@@ -52,8 +64,21 @@ def search_results(name):
         authors.append(authorName)
         subInfo.append(string[:-2])
 
+    return selfSubs, authors, subInfo
+
+@app.route('/results', methods=['GET', 'POST'])
+def search_results(name):
+
+    selfSubs, authors, subInfo = authorToAuthors(name) 
+
+    if selfSubs == None:
+        return render_template('error.html' )
+
     return render_template('results.html',  name = name, \
                                             len=len(authors), \
                                             subs = selfSubs, \
                                             authors = authors, \
                                             otherSubs = subInfo)
+
+if __name__ == "__main__":
+    app.run('0.0.0.0', 80)
