@@ -3,7 +3,12 @@ from GraphObject import GraphObject
 from MonthlyClock import MonthlyClock
 
 class AuthorSubEdges(GraphObject):
-
+    """ Relationships between authors and subreddits.
+    In particular, for any pair of author and subreddit,
+    the cumulative score gained by that author from that
+    subreddit is recorded (when the score is above the
+    truncation level (set as a default to 1 in the standard
+    configuration file."""
 
     def __init__(self, cfg, context):
         self.context = context

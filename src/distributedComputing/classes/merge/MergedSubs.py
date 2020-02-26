@@ -2,6 +2,7 @@ from MergedNodes import MergedNodes
 from MonthlyClock import MonthlyClock
 
 class MergedSubs(MergedNodes):
+    """ Merges subreddits """
  
     def __init__(self, cfg, context):
         self.context = context

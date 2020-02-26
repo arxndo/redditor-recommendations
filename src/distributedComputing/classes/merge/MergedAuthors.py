@@ -3,6 +3,7 @@ from MergedNodes import MergedNodes
 from MonthlyClock import MonthlyClock
 
 class MergedAuthors(MergedNodes):
+    """ Merges authors """
  
     def __init__(self, cfg, context):
         self.context = context

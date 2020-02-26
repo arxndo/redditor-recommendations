@@ -2,6 +2,10 @@ from Batches import Batches
 from MonthlyClock import MonthlyClock
 
 class GraphObject(Batches):
+    """ Abstract class whose instantiations load data from 
+    S3 parquet files into a spark data frame, transform the
+    data in some way, and then write the results back into 
+    separate S3 parquet files """
 
     def ingest(self, date):
         self.df = self.context \

@@ -2,6 +2,7 @@ from MonthlyClock import MonthlyClock
 from Nodes import Nodes
 
 class Subs(Nodes):
+    """ Subreddits """
  
     def __init__(self, cfg, context):
         self.context = context

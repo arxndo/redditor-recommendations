@@ -2,6 +2,9 @@ from spark.classes.Batches import Batches
 from utils.classes.MonthlyClock import MonthlyClock
 
 class CleanComments(Batches):
+    """ Comments removed of all information other than
+    author, top level parent (ie link_id), score, 
+    date of creation, subreddit, and upvotes """
 
     def __init__(self, cfg, context):
         self.context = context

@@ -2,6 +2,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql import HiveContext
 
 class MyContext:
+    """ The Spark context for distributed computing """
     
     @staticmethod
     def context(cfg, appName):

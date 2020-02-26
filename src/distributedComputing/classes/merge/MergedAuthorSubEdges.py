@@ -2,6 +2,7 @@ from MergedEdges import MergedEdges
 from MonthlyClock import MonthlyClock
 
 class MergedAuthorSubEdges(MergedEdges):
+    """ Merges author-to-subreddit edges """
  
     def __init__(self, cfg, context):
         self.context = context

@@ -2,7 +2,11 @@ from pyspark.sql import functions as F
 from GraphObject import GraphObject
 
 class AuthorAuthorEdges(GraphObject):
- 
+    """ Deprecated: Directly edge between authors, 
+    computed by determining number of common urls to which 
+    any pair of authors has posted comments to. This is intractable
+    for very large numbers of authors."""
+
     def transform(self, date):
         self.df = self.df \
                       .groupBy('author') \

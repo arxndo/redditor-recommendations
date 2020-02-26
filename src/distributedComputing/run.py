@@ -1,3 +1,5 @@
+""" Execute the 'process' method of any class that has one """
+
 from Executor import Executor
 import sys
 

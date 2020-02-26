@@ -3,6 +3,7 @@ from utils.classes.MonthlyClock import MonthlyClock
 from utils.classes.DailyClock import DailyClock
 
 class DailyComments(Batches):
+    """ Cleaned comments stored in S3 in daily batches """
 
     def __init__(self, cfg, context):
         self.context = context

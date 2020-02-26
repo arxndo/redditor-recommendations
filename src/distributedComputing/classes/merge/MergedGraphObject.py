@@ -1,5 +1,7 @@
 
 class MergedGraphObject:
+    """ Aggregate data for all months between the start and end dates
+    that are specifies in the configuration file """
  
     def process(self, startDate, endDate):
         self.ingest(startDate, endDate) \
