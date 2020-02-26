@@ -3,6 +3,7 @@ from utils.Batches import Batches
 from utils.MonthlyClock import MonthlyClock
 
 class RawComments(Batches):
+    """ Download raw comments and store in S3 """
 
     def __init__(self, cfg):
         self.commentsUrl = cfg['reddit']['commentsUrl']
@@ -10,7 +11,9 @@ class RawComments(Batches):
         self.outBucket = cfg['s3']['rawComments']
         self.clock = MonthlyClock()
 
+
     def ingest(self, date):
+        """ Download compressed file """
 
         print('\nIngesting %s' % date)
         os.system( "wget -r --no-parent -A 'RC_%s*' %s" \
@@ -18,6 +21,7 @@ class RawComments(Batches):
 
 
     def transform(self, date):
+        """ Unzip file """
 
         print('Transforming %s' % date)
         os.system('bzip2 -d %s/RC_%s.*' \
@@ -25,6 +29,7 @@ class RawComments(Batches):
 
 
     def write(self, date):
+        """ Move uncompressed file to S3 """
 
         print('Writing %s' % date)
         os.system('mv %s/RC_%s .' \
