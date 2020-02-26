@@ -2,6 +2,8 @@ import os
 from Configuration import Configuration
 
 class Importer:
+    """ Class for importing authors, subreddits, 
+    and relationships into neo4j database"""
 
     def __init__(self, cfg):
         self.bucket = cfg['s3']['merged'] 
@@ -10,21 +12,22 @@ class Importer:
         self.edges = 'author-sub'
         self.path = '~/redditor-recommendations'
 
+
     def process(self, startDate, endDate):
         self.startDate = startDate
         self.endDate = endDate
-        self.downloadAll()
+        self.downloadAllFromS3()
         self.toDatabase()
         self.cleanUp()
 
-    def downloadAll(self):
-        #if not os.path.isdir('%s/tmp' % self.path):
+
+    def downloadAllFromS3(self):
         if not os.path.isdir('tmp'):
             for name in [self.nodes1, self.nodes2, self.edges]:
-                self.download(name)
+                self.downloadFromS3(name)
         return self
 
-    def download(self, name):
+    def downloadFromS3(self, name):
         dirName = '%s_%s_%s' % (name, self.startDate, self.endDate)
         options = '--recursive --exclude "*" --include "*.csv"'
         os.system('aws s3 cp s3://%s/%s/ tmp %s' \
