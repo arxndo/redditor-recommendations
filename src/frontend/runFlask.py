@@ -1,4 +1,3 @@
-#import importPaths
 import sys
 sys.path.insert(0, '~/redditor-recommendations')
 

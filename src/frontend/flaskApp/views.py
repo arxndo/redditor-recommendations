@@ -1,7 +1,7 @@
 import json
 import sys
-sys.path.append('neo4j/classes')
-sys.path.append('utils/classes')
+sys.path.append('src/database/classes')
+sys.path.append('src/utils')
 from NeoReddit import NeoReddit 
 from Configuration import Configuration
 from flask import render_template, flash, request, redirect
