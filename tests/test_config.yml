@@ -1,0 +1,34 @@
+s3:
+    rawComments: romeostestbucket
+    cleanComments: romeostestbucket
+    authors: romeostestbucket
+    subreddits: romeostestbucket
+    relationships: romeostestbucket
+    merged: romeostestbucket
+
+    dailyComments: romeostestbucket
+    dailyEdges: romeostestbucket
+
+reddit:
+    commentsUrl: https://files.pushshift.io/reddit/comments
+    commentsPath: files.pushshift.io/reddit/comments
+
+spark:
+    master: spark://10.0.0.12:7077
+
+neo4j:
+        address: bolt://127.0.0.1:7687
+        username: neo4j
+        password: insight
+
+flask:
+    address: none
+
+dates:
+    startDate: 2005-12
+    endDate: 2005-12
+
+tuning:
+    truncation: 1
+    edgePartitions: 1
+    nodePartitions: 48
