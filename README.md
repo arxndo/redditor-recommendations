@@ -1,4 +1,5 @@
 # Redditor Recommendations
+To use the app, visit [swiftaugur.club](http://swiftaugur.club).
 
 ## Background
 
@@ -26,7 +27,7 @@ In addition to bolstering transparency and privacy, implementing a system for re
 
 the two subreddits from which the user has reaped the most karma are the Batman and Patriots themed subeddits. The redditors in the second column of the image are those with the highest scores on those two subreddits, and are thus the redditors that RR recommends to the original user as accounts to follow. In addition to the redditor recommendation, RR also provides the top subreddits that those redditors receive karma from. Listing these subreddits is done primarily to provide a better picture of who the new person is that the user may start following, but it is also beneficial to have this list serve as subreddit recommendation system in tself. 
 
-The homepage of the app (when it is activated) is located at swiftaugur.club, and currently looks as follows:
+The homepage of the app (when it is activated) is located at [swiftaugur.club](http://swiftaugur.club), and currently looks as follows:
 
 ![search](images/search.png)
 
