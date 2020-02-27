@@ -22,6 +22,14 @@ class NeoReddit:
         return karma
 
 
+    def warmUpCache(self):
+        with self.driver.session() as session:
+            tx = session.begin_transaction()
+            result= tx.run("match (s:subreddit) return s.name")
+        for item in result.records():
+            _ = self.subToAuthors(item[0], 2) 
+        return self
+
     @functools.lru_cache(maxsize = None)
     def authorToAuthors(self, name, n):
         """ Return greatest karma contributor for each of a given redditor's
