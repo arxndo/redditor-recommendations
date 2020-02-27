@@ -42,13 +42,18 @@ def authorToAuthors(name):
     authorRecords = neoReddit.authorToAuthors(name, 5)
 
     if not authorRecords:
-        return None
+        return None, None, None
 
     karma = neoReddit.getKarma(name)
     subList = neoReddit.authorToSubs(name, 5)
     selfSubs = []
     for record in subList:
-        string = '%s %d%%' % (record[0], round(100*record[1]/karma))
+        val = 100*record[1]/karma
+        if val >= 1:
+            string = '%s %d%%' % (record[0], round(val))
+        else:
+            string = '%s %.2g%%' % (record[0], val)
+
         selfSubs.append(string) 
     
 
@@ -60,7 +65,14 @@ def authorToAuthors(name):
         string = ''
         authorSubs = neoReddit.authorToSubs(authorName, 3)
         for subRecord in authorSubs:
-            string += '%s %d%%, ' % (subRecord[0], round(100*subRecord[1]/authorKarma))
+            # Show whole percentage if above 1, otherwise 
+            # show two significant digits
+            val = 100*subRecord[1]/authorKarma
+            if val >= 1:
+                string += '%s %d%%, ' % (subRecord[0], round(val))
+            else:
+                string += '%s %.2g%%, ' % (subRecord[0], val)
+            
         authors.append(authorName)
         subInfo.append(string[:-2])
 
@@ -68,7 +80,7 @@ def authorToAuthors(name):
 
 @app.route('/results', methods=['GET', 'POST'])
 def search_results(name):
-
+    print(name) 
     selfSubs, authors, subInfo = authorToAuthors(name) 
 
     if selfSubs == None:

@@ -31,8 +31,12 @@ class NeoReddit:
         authorRecords = []
         for sub in subs:
             subName = sub[0]
-            authorList = self.subToAuthors(subName, 1)
-            authorRecords.append(authorList[0])
+            authorList = self.subToAuthors(subName, 2)
+            if authorList[0][0] == name:
+                authorRecords.append(authorList[1])
+            else:
+                authorRecords.append(authorList[0])
+
         return authorRecords
 
 
