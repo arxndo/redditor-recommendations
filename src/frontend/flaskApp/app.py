@@ -42,7 +42,7 @@ def authorToAuthors(name):
     authorRecords = neoReddit.authorToAuthors(name, 5)
 
     if not authorRecords:
-        return None
+        return None, None, None
 
     karma = neoReddit.getKarma(name)
     subList = neoReddit.authorToSubs(name, 5)
