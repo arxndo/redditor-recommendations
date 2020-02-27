@@ -7,7 +7,7 @@ from Configuration import Configuration
 from flask import render_template, flash, request, redirect
 from flask_caching import Cache
 from flask import Flask
-
+import timeit
 
 config = {
         "DEBUG": False,
@@ -21,6 +21,15 @@ cache = Cache(app)
 
 cfg = Configuration.configuration('config.yml')
 neoReddit = NeoReddit(cfg)
+
+# Warm up cache (~10 min for 300,000 subreddits)
+print('Warming up cache\n')
+tic = timeit.default_timer()
+neoReddit.warmUpCache()
+toc = timeit.default_timer()
+print('\n%.4f seconds\n' % (toc - tic))
+
+
 
 @app.route('/about')
 def about():
