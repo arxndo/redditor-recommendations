@@ -5,13 +5,21 @@ import timeit
 cfg = Configuration.configuration('config.yml')
 nr = NeoReddit(cfg)
 
+result = nr.jaccardSimilarity('arxndo', 'kn0thing')
+print(result)
+
+result = nr.cosineSimilarity('arxndo', 'kn0thing')
+print(result)
+
+exit()
+
 print('Warming up cache\n')
 tic = timeit.default_timer()
-nr.warmUpCache()
+#nr.warmUpCache()
 toc = timeit.default_timer()
 print('\n%.4f seconds\n' % (toc - tic))
 
-exit()
+
 
 tic = timeit.default_timer()
 authors = nr.authorToAuthors('arxndo', 5)
