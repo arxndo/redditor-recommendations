@@ -47,14 +47,15 @@ def home():
 
 
 def authorToAuthors(name):
+    N = 10
 
-    authorRecords = neoReddit.authorToAuthors(name, 5)
+    authorRecords = neoReddit.authorToAuthors(name, N)
 
     if not authorRecords:
         return None, None, None
 
     karma = neoReddit.getKarma(name)
-    subList = neoReddit.authorToSubs(name, 5)
+    subList = neoReddit.authorToSubs(name, N)
     selfSubs = []
     for record in subList:
         val = 100*record[1]/karma
@@ -68,9 +69,13 @@ def authorToAuthors(name):
 
     authors = []
     subInfo = []
+    similarities = []
     for record in authorRecords:
         authorName = record[0]
         authorKarma = neoReddit.getKarma(authorName)
+        similarityScore = neoReddit.cosineSimilarity(name, authorName)
+        similarities.append(similarityScore)
+
         string = ''
         authorSubs = neoReddit.authorToSubs(authorName, 3)
         for subRecord in authorSubs:
@@ -85,12 +90,12 @@ def authorToAuthors(name):
         authors.append(authorName)
         subInfo.append(string[:-2])
 
-    return selfSubs, authors, subInfo
+    return selfSubs, authors, subInfo, similarities
 
 @app.route('/results', methods=['GET', 'POST'])
 def search_results(name):
     print(name) 
-    selfSubs, authors, subInfo = authorToAuthors(name) 
+    selfSubs, authors, subInfo, similarities = authorToAuthors(name) 
 
     if selfSubs == None:
         return render_template('error.html' )
@@ -99,7 +104,8 @@ def search_results(name):
                                             len=len(authors), \
                                             subs = selfSubs, \
                                             authors = authors, \
-                                            otherSubs = subInfo)
+                                            otherSubs = subInfo, \
+                                            similarities = similarities)
 
 if __name__ == "__main__":
     app.run('0.0.0.0', 80)

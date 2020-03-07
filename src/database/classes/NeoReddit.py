@@ -72,6 +72,16 @@ class NeoReddit:
         return authorList
 
 
+    def jaccardSimilarity(self, name1, name2):
+        """ Return the jaccard similarity between two users"""
+
+        with self.driver.session() as session:
+            tx = session.begin_transaction()
+            result = tx.run('MATCH (a1:author {name: {name1}})-[:post_to]->(sub1) WITH a1, collect(id(sub1)) AS a1sub MATCH (a2:author {name: {name2}})-[:post_to]->(sub2) WITH a1, a1sub, a2, collect(id(sub2)) AS a2sub RETURN a1.name AS from, a2.name AS to, algo.similarity.jaccard(a1sub, a2sub) AS similarity')
+        for item in result.records():
+            return round(item['similarity'] , 2)
+
+
     def cosineSimilarity(self, name1, name2):
         """ Return the cosine similarity between two users"""
 
